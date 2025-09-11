@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hokejíček</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #000000;
+      color: #f2f2f2;
+    }
+    header {
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #9c27b0; /* akcentní barva */
+    }
+    nav a {
+      margin-left: 20px;
+      color: #f2f2f2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover {
+      color: #9c27b0;
+    }
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .section h2 {
+      color: #9c27b0;
+      margin-bottom: 30px;
+    }
+    .streams {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .stream {
+      background: #111;
+      border: 2px solid #9c27b0;
+      border-radius: 10px;
+      padding: 40px 30px;
+      min-width: 200px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .stream:hover {
+      transform: scale(1.05);
+      border-color: #d05ce3;
+    }
+    .stream h3 {
+      margin: 0 0 15px 0;
+      color: #f2f2f2;
+    }
+    .countdown {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #ff7043;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #9c27b0;
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .btn:hover {
+      background: #d05ce3;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      border-top: 1px solid #222;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">HOKEJÍČEK</div>
+    <nav>
+      <a href="#">Domů</a>
+      <a href="#">Streamy</a>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h2>Nejbližší streamy</h2>
+    <div class="streams">
+      <div class="stream">
+        <h3>Test 1</h3>
+        <div id="countdown" class="countdown">Načítám…</div>
+        <a href="#" class="btn">Sledovat</a>
+      </div>
+      <div class="stream">
+        <h3>Test 2</h3>
+        <p>Bez odpočtu</p>
+        <a href="#" class="btn">Sledovat</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Hokejíček. Všechna práva vyhrazena.
+  </footer>
+
+  <script>
+    // Nastav cíl odpočtu → zítra v 10:00
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 1);
+    targetDate.setHours(10, 0, 0, 0);
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "Začalo!";
+        return;
+      }
+
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        hours + "h " + minutes + "m " + seconds + "s ";
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
