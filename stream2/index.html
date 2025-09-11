@@ -8,15 +8,12 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
+      font-family: 'Poppins', sans-serif;
       background: #000;
       color: #fff;
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
     }
+
+    /* horní lišta */
     header {
       background: linear-gradient(135deg, #111, #1c1c1c);
       padding: 15px 30px;
@@ -40,51 +37,74 @@
       transition: 0.3s;
     }
     nav a:hover { color: #b34cff; }
-    .content {
+
+    /* rozdělení obrazovky */
+    .container {
       display: flex;
-      flex: 1;
+      flex-direction: row;
+      height: calc(100vh - 70px);
     }
-    .video {
-      flex: 3;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #000;
+    .video, .chat {
+      flex: 1;
+      padding: 10px;
     }
     .video iframe {
       width: 100%;
       height: 100%;
       border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
+
     .chat {
-      flex: 1.2;
-      background: #111;
-      border-left: 2px solid #b34cff;
+      max-width: 420px;
+    }
+    .chat-box {
+      background: #151515;
+      border: 2px solid #b34cff;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 100%;
+      box-shadow: 0 4px 15px rgba(179, 76, 255, 0.3);
       display: flex;
       flex-direction: column;
     }
     .chat-header {
       background: #b34cff;
-      padding: 10px;
+      color: #fff;
       font-weight: 600;
       text-align: center;
-      border-bottom: 1px solid #2d2d2d;
+      padding: 8px;
     }
-    .chat iframe {
+    .chat-box iframe {
       flex: 1;
-      border: none;
       width: 100%;
+      border: none;
     }
-    /* Blokace pravého tlačítka a F12 */
-    body {
-      -webkit-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+
+    footer {
+      background: #111;
+      color: #888;
+      font-size: 14px;
+      text-align: center;
+      padding: 15px;
+      border-top: 1px solid #2d2d2d;
     }
+    footer a { color: #b34cff; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
+
+  <!-- blokace pravého tlačítka a devtools -->
+  <script>
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.onkeydown = function(e) {
+      if(e.keyCode==123 || (e.ctrlKey && e.shiftKey && (e.keyCode==73 || e.keyCode==74)) || (e.ctrlKey && e.keyCode==85)) {
+        return false;
+      }
+    };
+  </script>
 </head>
-<body oncontextmenu="return false" 
-      onkeydown="return !(event.keyCode==123 || (event.ctrlKey && event.shiftKey && (event.keyCode==73 || event.keyCode==74)) || (event.ctrlKey && event.keyCode==85));">
+<body>
 
   <header>
     <a href="https://hokejicek.site" class="logo">HOKEJÍČEK</a>
@@ -94,15 +114,24 @@
     </nav>
   </header>
 
-  <div class="content">
+  <div class="container">
+    <!-- video -->
     <div class="video">
-      <iframe src="https://streambetter.cyou/embed/special/SK/jojsport.php" frameborder="0" width="640" height="360" allowfullscreen></iframe>
+      <iframe src="https://streambetter.cyou/embed/special/CZ/novasport3.php" allowfullscreen></iframe>
     </div>
+
+    <!-- chat -->
     <div class="chat">
-      <div class="chat-header">💬 Live Chat</div>
-      <iframe src="https://www.youtube.com/live_chat?is_popout=1&v=rdna6bGnmcY&embed_domain=hokejicek.site"></iframe>
+      <div class="chat-box">
+        <div class="chat-header">💬 Live Chat</div>
+        <iframe src="https://www.youtube.com/live_chat?v=QzbD9Cy1TNg&embed_domain=hokejicek.site"></iframe>
+      </div>
     </div>
   </div>
+
+  <footer>
+    © 2025 Hokejíček. Všechna práva vyhrazena. | <a href="/gdpr">GDPR</a>
+  </footer>
 
 </body>
 </html>
