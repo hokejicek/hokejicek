@@ -3,146 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hokejíček</title>
+  <title>Hokejíček | Přenosy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #000000;
-      color: #f2f2f2;
+    body { 
+      background:#000; 
+      color:#fff; 
+      font-family:'Poppins', sans-serif; 
+      margin:0; padding:0; 
     }
+
+    /* horní lišta */
     header {
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #222;
+      background:linear-gradient(135deg, #111, #1c1c1c);
+      padding:15px 30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 10px rgba(0,0,0,0.6);
     }
-    .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #9c27b0; /* akcentní barva */
+    header .logo {
+      font-size:22px;
+      font-weight:600;
+      color:#b34cff;
+      letter-spacing:1px;
+      text-decoration:none;
     }
     nav a {
-      margin-left: 20px;
-      color: #f2f2f2;
-      text-decoration: none;
-      font-weight: 500;
+      color:#fff;
+      text-decoration:none;
+      margin-left:25px;
+      font-weight:500;
+      transition:0.3s;
     }
-    nav a:hover {
-      color: #9c27b0;
+    nav a:hover { color:#b34cff; }
+
+    h1 { 
+      color:#b34cff; 
+      margin:30px 0; 
+      font-size:26px;
+      text-align:center;
     }
-    .section {
-      padding: 40px 20px;
-      text-align: center;
+
+    .matches {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:20px;
+      padding:20px;
     }
-    .section h2 {
-      color: #9c27b0;
-      margin-bottom: 30px;
+
+    .match {
+      background:#151515; 
+      border:1px solid #2d2d2d; 
+      border-radius:18px; 
+      padding:20px; 
+      width:260px;
+      text-align:center;
+      transition:0.3s;
+      box-shadow:0 4px 12px rgba(0,0,0,0.4);
     }
-    .streams {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
+    .match:hover {
+      transform:translateY(-5px);
+      border-color:#b34cff;
+      box-shadow:0 6px 18px rgba(179,76,255,0.4);
     }
-    .stream {
-      background: #111;
-      border: 2px solid #9c27b0;
-      border-radius: 10px;
-      padding: 40px 30px;
-      min-width: 200px;
-      transition: transform 0.2s, border-color 0.2s;
+    .match h2 {
+      font-size:16px;
+      color:#fff;
+      margin-bottom:10px;
     }
-    .stream:hover {
-      transform: scale(1.05);
-      border-color: #d05ce3;
-    }
-    .stream h3 {
-      margin: 0 0 15px 0;
-      color: #f2f2f2;
-    }
-    .countdown {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      color: #ff7043;
+    .time { 
+      color:#ff9800; 
+      font-weight:600; 
+      margin:12px 0;
+      font-size:15px;
     }
     .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #9c27b0;
-      color: #fff;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
+      display:inline-block; 
+      padding:10px 22px; 
+      background:#b34cff; 
+      color:#fff; 
+      text-decoration:none; 
+      border-radius:10px;
+      font-weight:600;
+      transition:0.3s;
     }
-    .btn:hover {
-      background: #d05ce3;
-    }
+    .btn:hover { background:#9b3ae6; }
+
     footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #777;
-      border-top: 1px solid #222;
-      margin-top: 50px;
+      margin-top:40px;
+      padding:20px;
+      background:#111;
+      font-size:14px;
+      color:#888;
+      border-top:1px solid #2d2d2d;
+      text-align:center;
     }
+    footer a { color:#b34cff; text-decoration:none; }
+    footer a:hover { text-decoration:underline; }
   </style>
 </head>
 <body>
+
   <header>
-    <div class="logo">HOKEJÍČEK</div>
+    <a href="https://hokejicek.site" class="logo">HOKEJÍČEK</a>
     <nav>
-      <a href="#">Domů</a>
-      <a href="#">Streamy</a>
+      <a href="/">Hlavní stránka</a>
+      <a href="/gdpr">GDPR</a>
     </nav>
   </header>
 
-  <section class="section">
-    <h2>Nejbližší streamy</h2>
-    <div class="streams">
-      <div class="stream">
-        <h3>Test 1</h3>
-        <div id="countdown" class="countdown">Načítám…</div>
-        <a href="/stream1" class="btn">Sledovat</a>
-      </div>
-      <div class="stream">
-        <h3>Test 2</h3>
-        <p>Bez odpočtu</p>
-        <a href="#" class="btn">Sledovat</a>
-      </div>
+  <h1>Nadcházející přenosy</h1>
+
+  <div class="matches">
+    <div class="match">
+      <h2>HC VERVA Litvínov vs HC Energie Karlovy Vary</h2>
+      <div>📅 12. 9. 2025 – 17:30</div>
+      <div id="countdown1" class="time"></div>
+      <a href="https://www.youtube.com/watch?v=f18vfr89RI0" class="btn">Sledovat</a>
     </div>
-  </section>
+
+    <div class="match">
+      <h2>BK Mladá Boleslav vs HC Kometa Brno</h2>
+      <div>📅 12. 9. 2025 – 17:30</div>
+      <div id="countdown2" class="time"></div>
+      <a href="https://www.youtube.com/watch?v=rdna6bGnmcY" class="btn">Sledovat</a>
+    </div>
+
+    <div class="match">
+      <h2>Bílí Tygři Liberec vs HC Dynamo Pardubice</h2>
+      <div>📅 12. 9. 2025 – 18:00</div>
+      <div id="countdown3" class="time"></div>
+      <a href="https://www.youtube.com/watch?v=W1nFYk_vOd8" class="btn">Sledovat</a>
+    </div>
+
+    <div class="match">
+      <h2>Mountfield HK vs HC Motor České Budějovice</h2>
+      <div>📅 12. 9. 2025 – 18:00</div>
+      <div id="countdown4" class="time"></div>
+      <a href="https://www.youtube.com/watch?v=_3nCUelB4SA" class="btn">Sledovat</a>
+    </div>
+
+    <div class="match">
+      <h2>HC Sparta Praha vs HC Oceláři Třinec</h2>
+      <div>📅 12. 9. 2025 – 18:30</div>
+      <div id="countdown5" class="time"></div>
+      <a href="https://www.youtube.com/watch?v=2zWwWZ3t7D0" class="btn">Sledovat</a>
+    </div>
+
+    <div class="match">
+      <h2>HC Olomouc vs HC Škoda Plzeň</h2>
+      <div>📅 12. 9. 2025 – 18:00</div>
+      <div id="countdown6" class="time"></div>
+      <a href="https://hokejicek.site/stream1" class="btn">Sledovat</a>
+    </div>
+
+    <div class="match">
+      <h2>HC Vítkovice vs Rytíři Kladno</h2>
+      <div>📅 12. 9. 2025 – 17:30</div>
+      <div id="countdown7" class="time"></div>
+      <a href="https://hokejicek.site/stream2" class="btn">Sledovat</a>
+    </div>
+  </div>
 
   <footer>
-    © 2025 Hokejíček. Všechna práva vyhrazena.
+    © 2025 Hokejíček. Všechna práva vyhrazena. | 
+    <a href="/gdpr">GDPR</a>
   </footer>
 
   <script>
-    // Nastav cíl odpočtu → zítra v 10:00
-    const targetDate = new Date();
-    targetDate.setDate(targetDate.getDate() + 1);
-    targetDate.setHours(10, 0, 0, 0);
+    function startCountdown(id, targetDate) {
+      function update() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
 
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
+        if (distance < 0) {
+          document.getElementById(id).innerHTML = "Začalo!";
+          return;
+        }
 
-      if (distance < 0) {
-        document.getElementById("countdown").innerHTML = "Začalo!";
-        return;
+        const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+        const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+        const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+        document.getElementById(id).innerHTML =
+          hours + "h " + minutes + "m " + seconds + "s";
       }
-
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("countdown").innerHTML =
-        hours + "h " + minutes + "m " + seconds + "s ";
+      update();
+      setInterval(update, 1000);
     }
 
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    // Nastavení časů
+    startCountdown("countdown1", new Date("Sep 12, 2025 17:30:00").getTime());
+    startCountdown("countdown2", new Date("Sep 12, 2025 17:30:00").getTime());
+    startCountdown("countdown3", new Date("Sep 12, 2025 18:00:00").getTime());
+    startCountdown("countdown4", new Date("Sep 12, 2025 18:00:00").getTime());
+    startCountdown("countdown5", new Date("Sep 12, 2025 18:30:00").getTime());
+    startCountdown("countdown6", new Date("Sep 12, 2025 18:00:00").getTime());
+    startCountdown("countdown7", new Date("Sep 12, 2025 17:30:00").getTime());
   </script>
 </body>
 </html>
