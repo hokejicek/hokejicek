@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream 1</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      padding: 15px 30px;
+      background: #111;
+      border-bottom: 2px solid #9c27b0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #9c27b0;
+    }
+    .content {
+      flex: 1;
+      display: flex;
+      background: #000;
+    }
+    .video {
+      flex: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .video iframe {
+      width: 90%;
+      height: 80%;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(156,39,176,0.7);
+    }
+    .chat {
+      flex: 1;
+      border-left: 2px solid #9c27b0;
+      background: #111;
+      display: flex;
+    }
+    .chat iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">HOKEJÍČEK</div>
+  </header>
+
+  <div class="content">
+    <!-- VLEVO: video -->
+    <div class="video">
+      <iframe src="https://streambetter.cyou/embed/special/CZ/ctsport.php" 
+              allowfullscreen></iframe>
+    </div>
+
+    <!-- VPRAVO: chat -->
+    <div class="chat">
+      <iframe src="https://tlk.io/hokejicek-chat"></iframe>
+    </div>
+  </div>
+</body>
+</html>
