@@ -12,7 +12,6 @@
       font-family: 'Poppins', sans-serif;
       background: #000;
       color: #fff;
-      overflow: hidden;
     }
 
     /* horní lišta */
@@ -28,7 +27,6 @@
       font-size: 22px;
       font-weight: 600;
       color: #b34cff;
-      letter-spacing: 1px;
       text-decoration: none;
     }
     nav a {
@@ -36,88 +34,25 @@
       text-decoration: none;
       margin-left: 25px;
       font-weight: 500;
-      transition: 0.3s;
     }
     nav a:hover { color: #b34cff; }
 
-    /* rozdělení obrazovky */
-    .container {
-      display: flex;
-      flex-direction: row;
-      height: calc(100vh - 70px);
-    }
-    .video {
-      flex: 3;
+    /* video uprostřed */
+    .video-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 10px;
+      height: calc(100vh - 130px); /* minus header + footer */
+      background: #000;
     }
     video {
-      width: 100%;
-      height: 100%;
+      width: 80%;
+      max-width: 1000px;
+      height: 70%;
+      border-radius: 12px;
       background: #000;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      box-shadow: 0 4px 20px rgba(179, 76, 255, 0.5);
     }
-
-    .chat {
-      flex: 1;
-      max-width: 420px;
-      padding: 10px;
-    }
-    .chat-box {
-      background: #151515;
-      border: 2px solid #b34cff;
-      border-radius: 12px;
-      overflow: hidden;
-      height: 100%;
-      box-shadow: 0 4px 15px rgba(179, 76, 255, 0.3);
-      display: flex;
-      flex-direction: column;
-    }
-    .chat-header {
-      background: #b34cff;
-      color: #fff;
-      font-weight: 600;
-      text-align: center;
-      padding: 8px;
-    }
-    #messages {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      font-size: 14px;
-    }
-    #messages p {
-      margin: 5px 0;
-    }
-    form {
-      display: flex;
-      border-top: 1px solid #333;
-    }
-    input, button {
-      padding: 10px;
-      border: none;
-      outline: none;
-    }
-    #username {
-      width: 25%;
-      background: #222;
-      color: #fff;
-    }
-    #message {
-      flex: 1;
-      background: #111;
-      color: #fff;
-    }
-    button {
-      background: #b34cff;
-      color: #fff;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    button:hover { background: #9b3ae6; }
 
     footer {
       background: #111;
@@ -153,24 +88,8 @@
     </nav>
   </header>
 
-  <div class="container">
-    <!-- video -->
-    <div class="video">
-      <video id="hls-video" controls autoplay muted></video>
-    </div>
-
-    <!-- chat -->
-    <div class="chat">
-      <div class="chat-box">
-        <div class="chat-header">💬 Live Chat</div>
-        <div id="messages"></div>
-        <form id="chatForm">
-          <input type="text" id="username" placeholder="Jméno" required>
-          <input type="text" id="message" placeholder="Napiš zprávu..." required>
-          <button type="submit">Odeslat</button>
-        </form>
-      </div>
-    </div>
+  <div class="video-wrapper">
+    <video id="hls-video" controls autoplay></video>
   </div>
 
   <footer>
@@ -178,41 +97,16 @@
   </footer>
 
   <script>
-    // HLS přehrávač
-    if(Hls.isSupported()) {
-      const video = document.getElementById('hls-video');
+    const video = document.getElementById('hls-video');
+    const src = "https://extra.oneplay.sbs/5867-2923-2847-5907/tracks-v1a1/mono.ts.m3u8";
+
+    if (Hls.isSupported()) {
       const hls = new Hls();
-      hls.loadSource("https://extra.oneplay.sbs/5867-2923-2847-5907/tracks-v1a1/mono.ts.m3u8");
+      hls.loadSource(src);
       hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = src;
     }
-
-    // CHAT
-    async function loadMessages() {
-      const res = await fetch("chat.php?action=get");
-      const data = await res.json();
-      const box = document.getElementById("messages");
-      box.innerHTML = "";
-      data.forEach(msg => {
-        box.innerHTML += `<p><b>${msg.username}</b>: ${msg.message}</p>`;
-      });
-      box.scrollTop = box.scrollHeight;
-    }
-
-    document.getElementById("chatForm").addEventListener("submit", async e => {
-      e.preventDefault();
-      const username = document.getElementById("username").value;
-      const message = document.getElementById("message").value;
-      await fetch("chat.php?action=send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, message })
-      });
-      document.getElementById("message").value = "";
-      loadMessages();
-    });
-
-    setInterval(loadMessages, 3000);
-    loadMessages();
   </script>
 
 </body>
