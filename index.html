@@ -13,20 +13,18 @@
       margin:0; padding:0; 
     }
 
-    /* horní lišta */
     header {
-      background:linear-gradient(135deg, #111, #1c1c1c);
+      background:#111;
       padding:15px 30px;
       display:flex;
       justify-content:space-between;
       align-items:center;
-      box-shadow:0 2px 10px rgba(0,0,0,0.6);
+      border-bottom:2px solid #b34cff;
     }
     header .logo {
       font-size:22px;
       font-weight:600;
       color:#b34cff;
-      letter-spacing:1px;
       text-decoration:none;
     }
     nav a {
@@ -38,54 +36,42 @@
     }
     nav a:hover { color:#b34cff; }
 
-    h1 { 
-      color:#b34cff; 
-      margin:30px 0; 
-      font-size:26px;
-      text-align:center;
+    h2 {
+      color:#b34cff;
+      margin:30px auto 10px auto;
+      width:85%;
+      font-size:18px;
+      border-bottom:1px solid #2d2d2d;
+      padding-bottom:8px;
     }
 
-    .matches {
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:20px;
-      padding:20px;
+    table {
+      width:85%;
+      margin:0 auto 40px auto;
+      border-collapse:collapse;
+      background:#151515;
+      border-radius:8px;
+      overflow:hidden;
+      box-shadow:0 0 12px rgba(179,76,255,0.2);
     }
-
-    .match {
-      background:#151515; 
-      border:1px solid #2d2d2d; 
-      border-radius:18px; 
-      padding:20px; 
-      width:260px;
-      text-align:center;
+    tbody tr {
+      border-bottom:1px solid #2a2a2a;
       transition:0.3s;
-      box-shadow:0 4px 12px rgba(0,0,0,0.4);
     }
-    .match:hover {
-      transform:translateY(-5px);
-      border-color:#b34cff;
-      box-shadow:0 6px 18px rgba(179,76,255,0.4);
-    }
-    .match h2 {
-      font-size:16px;
-      color:#fff;
-      margin-bottom:10px;
-    }
-    .time { 
-      color:#ff9800; 
-      font-weight:600; 
-      margin:12px 0;
+    tbody tr:hover { background:#222; }
+    td {
+      padding:10px;
       font-size:15px;
+      text-align:center;
     }
+    .time { width:140px; font-weight:600; color:#ff9800; }
+    .teams { text-align:left; }
     .btn {
-      display:inline-block; 
-      padding:10px 22px; 
-      background:#b34cff; 
-      color:#fff; 
-      text-decoration:none; 
-      border-radius:10px;
+      padding:6px 14px;
+      background:#b34cff;
+      color:#fff;
+      text-decoration:none;
+      border-radius:6px;
       font-weight:600;
       transition:0.3s;
     }
@@ -114,58 +100,73 @@
     </nav>
   </header>
 
-  <h1>Nadcházející přenosy</h1>
+  <h2>Česko: Tipsport Extraliga</h2>
+  <table>
+    <tbody>
+      <tr>
+        <td class="time" id="count1"></td>
+        <td class="teams">Litvínov</td>
+        <td>-</td>
+        <td class="teams">Karlovy Vary</td>
+        <td><a href="#" class="btn">Sledovat</a></td>
+      </tr>
+      <tr>
+        <td class="time" id="count2"></td>
+        <td class="teams">Mladá Boleslav</td>
+        <td>-</td>
+        <td class="teams">Kometa Brno</td>
+        <td><a href="#" class="btn">Sledovat</a></td>
+      </tr>
+      <tr>
+        <td class="time" id="count3"></td>
+        <td class="teams">Vítkovice</td>
+        <td>-</td>
+        <td class="teams">Kladno</td>
+        <td><a href="#" class="btn">Sledovat</a></td>
+      </tr>
+      <tr>
+        <td class="time" id="count4"></td>
+        <td class="teams">Liberec</td>
+        <td>-</td>
+        <td class="teams">Pardubice</td>
+        <td><a href="#" class="btn">Sledovat</a></td>
+      </tr>
+      <tr>
+        <td class="time" id="count5"></td>
+        <td class="teams">Mountfield HK</td>
+        <td>-</td>
+        <td class="teams">České Budějovice</td>
+        <td><a href="#" class="btn">Sledovat</a></td>
+      </tr>
+      <tr>
+        <td class="time" id="count6"></td>
+        <td class="teams">Olomouc</td>
+        <td>-</td>
+        <td class="teams">Plzeň</td>
+        <td><a href="#" class="btn">Sledovat</a></td>
+      </tr>
+      <tr>
+        <td class="time" id="count7"></td>
+        <td class="teams">Sparta Praha</td>
+        <td>-</td>
+        <td class="teams">Třinec</td>
+        <td><a href="#" class="btn">Sledovat</a></td>
+      </tr>
+    </tbody>
+  </table>
 
-  <div class="matches">
-    <div class="match">
-      <h2>HC VERVA Litvínov vs HC Energie Karlovy Vary</h2>
-      <div>📅 12. 9. 2025 – 17:30</div>
-      <div id="countdown1" class="time"></div>
-      <a href="https://www.youtube.com/watch?v=f18vfr89RI0" class="btn">Sledovat</a>
-    </div>
-
-    <div class="match">
-      <h2>BK Mladá Boleslav vs HC Kometa Brno</h2>
-      <div>📅 12. 9. 2025 – 17:30</div>
-      <div id="countdown2" class="time"></div>
-      <a href="https://www.youtube.com/watch?v=rdna6bGnmcY" class="btn">Sledovat</a>
-    </div>
-
-    <div class="match">
-      <h2>Bílí Tygři Liberec vs HC Dynamo Pardubice</h2>
-      <div>📅 12. 9. 2025 – 18:00</div>
-      <div id="countdown3" class="time"></div>
-      <a href="https://www.youtube.com/watch?v=W1nFYk_vOd8" class="btn">Sledovat</a>
-    </div>
-
-    <div class="match">
-      <h2>Mountfield HK vs HC Motor České Budějovice</h2>
-      <div>📅 12. 9. 2025 – 18:00</div>
-      <div id="countdown4" class="time"></div>
-      <a href="https://www.youtube.com/watch?v=_3nCUelB4SA" class="btn">Sledovat</a>
-    </div>
-
-    <div class="match">
-      <h2>HC Sparta Praha vs HC Oceláři Třinec</h2>
-      <div>📅 12. 9. 2025 – 18:30</div>
-      <div id="countdown5" class="time"></div>
-      <a href="https://www.youtube.com/watch?v=2zWwWZ3t7D0" class="btn">Sledovat</a>
-    </div>
-
-    <div class="match">
-      <h2>HC Olomouc vs HC Škoda Plzeň</h2>
-      <div>📅 12. 9. 2025 – 18:00</div>
-      <div id="countdown6" class="time"></div>
-      <a href="https://hokejicek.site/stream1" class="btn">Sledovat</a>
-    </div>
-
-    <div class="match">
-      <h2>HC Vítkovice vs Rytíři Kladno</h2>
-      <div>📅 12. 9. 2025 – 17:30</div>
-      <div id="countdown7" class="time"></div>
-      <a href="https://hokejicek.site/stream2" class="btn">Sledovat</a>
-    </div>
-  </div>
+  <h2>Česko: Maxa liga</h2>
+  <table>
+    <tbody>
+      <tr>
+        <td class="time" id="count8"></td>
+        <td class="teams">Zlín</td>
+        <td>-</td>
+        <td class="teams">Jihlava</td>
+        <td><a href="#" class="btn">Sledovat</a></td>
+      </tr>
+    </tbody>
+  </table>
 
   <footer>
     © 2025 Hokejíček. Všechna práva vyhrazena. | 
@@ -173,35 +174,32 @@
   </footer>
 
   <script>
-    function startCountdown(id, targetDate) {
+    function startCountdown(id, date) {
       function update() {
         const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        if (distance < 0) {
+        const dist = date - now;
+        if (dist < 0) {
           document.getElementById(id).innerHTML = "Začalo!";
           return;
         }
-
-        const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-        const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-        const seconds = Math.floor((distance % (1000*60)) / 1000);
-
-        document.getElementById(id).innerHTML =
-          hours + "h " + minutes + "m " + seconds + "s";
+        const h = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
+        const m = Math.floor((dist % (1000*60*60)) / (1000*60));
+        const s = Math.floor((dist % (1000*60)) / 1000);
+        document.getElementById(id).innerHTML = h+"h "+m+"m "+s+"s";
       }
       update();
       setInterval(update, 1000);
     }
 
-    // Nastavení časů
-    startCountdown("countdown1", new Date("Sep 12, 2025 17:30:00").getTime());
-    startCountdown("countdown2", new Date("Sep 12, 2025 17:30:00").getTime());
-    startCountdown("countdown3", new Date("Sep 12, 2025 18:00:00").getTime());
-    startCountdown("countdown4", new Date("Sep 12, 2025 18:00:00").getTime());
-    startCountdown("countdown5", new Date("Sep 12, 2025 18:30:00").getTime());
-    startCountdown("countdown6", new Date("Sep 12, 2025 18:00:00").getTime());
-    startCountdown("countdown7", new Date("Sep 12, 2025 17:30:00").getTime());
+    // Nastavení všech zápasů
+    startCountdown("count1", new Date("Sep 12, 2025 17:30:00").getTime());
+    startCountdown("count2", new Date("Sep 12, 2025 17:30:00").getTime());
+    startCountdown("count3", new Date("Sep 12, 2025 17:30:00").getTime());
+    startCountdown("count4", new Date("Sep 12, 2025 18:00:00").getTime());
+    startCountdown("count5", new Date("Sep 12, 2025 18:00:00").getTime());
+    startCountdown("count6", new Date("Sep 12, 2025 18:00:00").getTime());
+    startCountdown("count7", new Date("Sep 12, 2025 18:30:00").getTime());
+    startCountdown("count8", new Date("Sep 12, 2025 17:30:00").getTime());
   </script>
 </body>
 </html>
