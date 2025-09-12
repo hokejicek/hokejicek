@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hokejíček | Stream 1</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
       background: #000;
       color: #fff;
+      text-align: center;
     }
 
-    /* horní lišta */
     header {
       background: linear-gradient(135deg, #111, #1c1c1c);
       padding: 15px 30px;
@@ -34,24 +33,23 @@
       text-decoration: none;
       margin-left: 25px;
       font-weight: 500;
+      transition: 0.3s;
     }
     nav a:hover { color: #b34cff; }
 
-    /* video uprostřed */
-    .video-wrapper {
+    .video-container {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: calc(100vh - 130px); /* minus header + footer */
-      background: #000;
+      height: calc(100vh - 120px);
     }
-    video {
+    .video-container iframe, video {
       width: 80%;
       max-width: 1000px;
-      height: 70%;
+      height: 70vh;
       border-radius: 12px;
-      background: #000;
-      box-shadow: 0 4px 20px rgba(179, 76, 255, 0.5);
+      border: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
 
     footer {
@@ -66,15 +64,15 @@
     footer a:hover { text-decoration: underline; }
   </style>
 
-  <!-- Blokace pravého tlačítka a DevTools -->
+  <!-- Blokace pravého tlačítka a devtools -->
   <script>
-    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('contextmenu', event => event.preventDefault());
     document.onkeydown = function(e) {
-      if (
-        e.keyCode==123 || // F12
-        (e.ctrlKey && e.shiftKey && (e.keyCode==73 || e.keyCode==74)) || // Ctrl+Shift+I/J
-        (e.ctrlKey && e.keyCode==85) // Ctrl+U
-      ) return false;
+      if (e.keyCode == 123 || // F12
+          (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || // Ctrl+Shift+I / J
+          (e.ctrlKey && e.keyCode == 85)) { // Ctrl+U
+        return false;
+      }
     };
   </script>
 </head>
@@ -88,26 +86,20 @@
     </nav>
   </header>
 
-  <div class="video-wrapper">
-    <video id="hls-video" controls autoplay></video>
+  <div class="video-container">
+    <!-- Přehrávač -->
+    <video controls autoplay>
+      <source src="https://extra.oneplay.sbs/5867-2923-2847-5907/tracks-v1a1/mono.ts.m3u8" type="application/x-mpegURL">
+      Váš prohlížeč nepodporuje HTML5 video.
+    </video>
   </div>
 
   <footer>
     © 2025 Hokejíček. Všechna práva vyhrazena. | <a href="/gdpr">GDPR</a>
   </footer>
 
-  <script>
-    const video = document.getElementById('hls-video');
-    const src = "https://extra.oneplay.sbs/5867-2923-2847-5907/tracks-v1a1/mono.ts.m3u8";
-
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(src);
-      hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = src;
-    }
-  </script>
+  <!-- Adsterra Popunder -->
+  <script type="text/javascript" src="//pl27627748.revenuecpmgate.com/ec/c0/a3/ecc0a32c59188c6d860b60397a754519.js"></script>
 
 </body>
 </html>
