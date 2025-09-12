@@ -13,6 +13,7 @@
       margin:0; padding:0; 
     }
 
+    /* horní lišta */
     header {
       background:#111;
       padding:15px 30px;
@@ -36,13 +37,11 @@
     }
     nav a:hover { color:#b34cff; }
 
-    h2 {
-      color:#b34cff;
-      margin:30px auto 10px auto;
+    h2 { 
+      color:#b34cff; 
+      margin:30px auto 10px auto; 
+      font-size:20px;
       width:85%;
-      font-size:18px;
-      border-bottom:1px solid #2d2d2d;
-      padding-bottom:8px;
     }
 
     table {
@@ -53,6 +52,7 @@
       border-radius:8px;
       overflow:hidden;
       box-shadow:0 0 12px rgba(179,76,255,0.2);
+      table-layout: fixed;
     }
     tbody tr {
       border-bottom:1px solid #2a2a2a;
@@ -63,10 +63,12 @@
       padding:10px;
       font-size:15px;
       text-align:center;
+      vertical-align:middle;
     }
-    .time { width:140px; font-weight:600; color:#ff9800; }
+    .time { font-weight:600; color:#ff9800; }
     .teams { text-align:left; }
     .btn {
+      display:inline-block;
       padding:6px 14px;
       background:#b34cff;
       color:#fff;
@@ -102,61 +104,75 @@
 
   <h2>Česko: Tipsport Extraliga</h2>
   <table>
+    <colgroup>
+      <col style="width:120px;">
+      <col style="width:200px;">
+      <col style="width:20px;">
+      <col style="width:200px;">
+      <col style="width:120px;">
+    </colgroup>
     <tbody>
       <tr>
         <td class="time" id="count1"></td>
         <td class="teams">Litvínov</td>
         <td>-</td>
         <td class="teams">Karlovy Vary</td>
-        <td><a href="#" class="btn">Sledovat</a></td>
+        <td><a href="https://www.youtube.com/watch?v=f18vfr89RI0" class="btn">Sledovat</a></td>
       </tr>
       <tr>
         <td class="time" id="count2"></td>
         <td class="teams">Mladá Boleslav</td>
         <td>-</td>
         <td class="teams">Kometa Brno</td>
-        <td><a href="#" class="btn">Sledovat</a></td>
+        <td><a href="https://www.youtube.com/watch?v=rdna6bGnmcY" class="btn">Sledovat</a></td>
       </tr>
       <tr>
         <td class="time" id="count3"></td>
         <td class="teams">Vítkovice</td>
         <td>-</td>
         <td class="teams">Kladno</td>
-        <td><a href="#" class="btn">Sledovat</a></td>
+        <td><a href="https://hokejicek.site/stream2" class="btn">Sledovat</a></td>
       </tr>
       <tr>
         <td class="time" id="count4"></td>
         <td class="teams">Liberec</td>
         <td>-</td>
         <td class="teams">Pardubice</td>
-        <td><a href="#" class="btn">Sledovat</a></td>
+        <td><a href="https://www.youtube.com/watch?v=W1nFYk_vOd8" class="btn">Sledovat</a></td>
       </tr>
       <tr>
         <td class="time" id="count5"></td>
         <td class="teams">Mountfield HK</td>
         <td>-</td>
         <td class="teams">České Budějovice</td>
-        <td><a href="#" class="btn">Sledovat</a></td>
+        <td><a href="https://www.youtube.com/watch?v=_3nCUelB4SA" class="btn">Sledovat</a></td>
       </tr>
       <tr>
         <td class="time" id="count6"></td>
         <td class="teams">Olomouc</td>
         <td>-</td>
         <td class="teams">Plzeň</td>
-        <td><a href="#" class="btn">Sledovat</a></td>
+        <td><a href="https://hokejicek.site/stream1" class="btn">Sledovat</a></td>
       </tr>
       <tr>
         <td class="time" id="count7"></td>
         <td class="teams">Sparta Praha</td>
         <td>-</td>
         <td class="teams">Třinec</td>
-        <td><a href="#" class="btn">Sledovat</a></td>
+        <td><a href="https://www.youtube.com/watch?v=2zWwWZ3t7D0" class="btn">Sledovat</a></td>
       </tr>
     </tbody>
   </table>
 
   <h2>Česko: Maxa liga</h2>
   <table>
+    <colgroup>
+      <col style="width:120px;">
+      <col style="width:200px;">
+      <col style="width:20px;">
+      <col style="width:200px;">
+      <col style="width:120px;">
+    </colgroup>
     <tbody>
       <tr>
         <td class="time" id="count8"></td>
@@ -170,28 +186,32 @@
 
   <footer>
     © 2025 Hokejíček. Všechna práva vyhrazena. | 
-    <a href="/gdpr">GDPR</a>
+    <a href="/gdpr.html">GDPR</a>
   </footer>
 
   <script>
-    function startCountdown(id, date) {
+    function startCountdown(id, targetDate) {
       function update() {
         const now = new Date().getTime();
-        const dist = date - now;
-        if (dist < 0) {
+        const distance = targetDate - now;
+
+        if (distance < 0) {
           document.getElementById(id).innerHTML = "Začalo!";
           return;
         }
-        const h = Math.floor((dist % (1000*60*60*24)) / (1000*60*60));
-        const m = Math.floor((dist % (1000*60*60)) / (1000*60));
-        const s = Math.floor((dist % (1000*60)) / 1000);
-        document.getElementById(id).innerHTML = h+"h "+m+"m "+s+"s";
+
+        const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+        const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+        const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+        document.getElementById(id).innerHTML =
+          hours + "h " + minutes + "m " + seconds + "s";
       }
       update();
       setInterval(update, 1000);
     }
 
-    // Nastavení všech zápasů
+    // Nastavení časů
     startCountdown("count1", new Date("Sep 12, 2025 17:30:00").getTime());
     startCountdown("count2", new Date("Sep 12, 2025 17:30:00").getTime());
     startCountdown("count3", new Date("Sep 12, 2025 17:30:00").getTime());
@@ -201,5 +221,6 @@
     startCountdown("count7", new Date("Sep 12, 2025 18:30:00").getTime());
     startCountdown("count8", new Date("Sep 12, 2025 17:30:00").getTime());
   </script>
+
 </body>
 </html>
