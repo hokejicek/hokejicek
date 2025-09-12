@@ -1,190 +1,148 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hokejíček | GDPR</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hokejíček – GDPR</title>
   <style>
-    :root{
-      --bg:#000;
-      --panel:#151515;
-      --panel-2:#111;
-      --border:#2d2d2d;
-      --accent:#b34cff;
-      --accent-2:#9b3ae6;
-      --text:#fff;
-      --muted:#aaa;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; background:var(--bg); color:var(--text);
-      font-family:'Poppins',sans-serif; line-height:1.6;
-    }
-    /* Header */
-    header{
-      background:linear-gradient(135deg,#111,#1c1c1c);
-      padding:15px 30px; display:flex; justify-content:space-between; align-items:center;
-      box-shadow:0 2px 10px rgba(0,0,0,.6);
-      position:sticky; top:0; z-index:10;
-    }
-    .logo{
-      color:var(--accent); font-size:22px; font-weight:600; text-decoration:none; letter-spacing:1px;
-    }
-    nav a{
-      color:#fff; text-decoration:none; margin-left:25px; font-weight:500; transition:.25s;
-    }
-    nav a:hover{ color:var(--accent); }
-
-    /* Main */
-    .wrap{
-      max-width:960px; margin:32px auto; padding:0 20px;
-    }
-    h1{
-      text-align:center; color:var(--accent); margin:10px 0 24px; font-size:28px;
-    }
-    .panel{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:22px;
-      margin-bottom:16px;
-      box-shadow:0 4px 12px rgba(0,0,0,.35);
-    }
-    h2{
-      margin:0 0 10px; font-size:18px;
-    }
-    ul{ margin:8px 0 0 18px; }
-    a{ color:var(--accent); }
-    a:hover{ color:var(--accent-2); }
-
-    /* Footer */
-    footer{
-      margin-top:40px; padding:20px; background:var(--panel-2);
-      border-top:1px solid var(--border); color:var(--muted); text-align:center;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* Little low-poly vibe line */
-    .lp{
-      height:6px; border-radius:6px; margin:0 auto 20px;
-      background:linear-gradient(135deg, rgba(179,76,255,.9), rgba(155,58,230,.9));
-      max-width:220px;
+    /* Horní lišta */
+    .lowpoly-bg {
+      background: #1a1a1a;
+      border-radius: 0 0 28px 28px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    }
+    header {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #bb86fc;
+    }
+    nav a {
+      margin-left: 24px;
+      color: #f5f5f5;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #bb86fc;
     }
 
-    /* Small details */
-    .kicker{ color:#ffb74d; font-weight:600; font-size:14px; letter-spacing:.4px; }
-    .muted{ color:var(--muted); }
-    .block{ display:block; }
-    .mono{ font-family:ui-monospace,SFMono-Regular,Consolas,monospace; font-size:13px; }
+    /* Obsah */
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #1e1e1e;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+      line-height: 1.7;
+    }
+
+    h1 {
+      color: #bb86fc;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h2 {
+      color: #ff44ff;
+      margin-top: 30px;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #ddd;
+    }
+
+    ul {
+      margin: 10px 0 20px 20px;
+      color: #ddd;
+    }
+
+    footer {
+      background: #1a1a1a;
+      color: #aaa;
+      text-align: center;
+      padding: 15px;
+      border-top: 2px solid #bb86fc;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <a class="logo" href="https://hokejicek.site">HOKEJÍČEK</a>
-    <nav>
-      <a href="/">Hlavní stránka</a>
-      <a href="/gdpr">GDPR</a>
-    </nav>
-  </header>
+  <!-- Horní lišta -->
+  <div class="lowpoly-bg">
+    <header>
+      <div class="logo">Hokejíček</div>
+      <nav>
+        <a href="index.html">Hlavní stránka</a>
+        <a href="gdpr.html">GDPR</a>
+      </nav>
+    </header>
+  </div>
 
-  <main class="wrap">
+  <!-- Obsah -->
+  <main>
     <h1>Ochrana osobních údajů (GDPR)</h1>
-    <div class="lp"></div>
 
-    <section class="panel">
-      <div class="kicker">Základní informace</div>
-      <p>
-        Tato stránka popisuje, jak <strong>Hokejíček</strong> zpracovává osobní údaje návštěvníků webu
-        <a href="https://hokejicek.site">hokejicek.site</a> a souvisejících podstránek. Zpracování probíhá v souladu
-        s Nařízením (EU) 2016/679 (GDPR) a relevantní českou legislativou.
-      </p>
-    </section>
+    <p>Provozovatelem webu <strong>Hokejíček</strong> je stejný majitel, který spravuje také komunitní Discord skupinu <strong>Cyber Sticks</strong>. Oba projekty spolu úzce souvisí a mají společnou správu.</p>
 
-    <section class="panel">
-      <h2>Správce osobních údajů</h2>
-      <p>
-        <strong>Hokejíček</strong><br/>
-        E-mail: <a href="mailto:info@hokejicek.site">info@hokejicek.site</a>
-      </p>
-    </section>
+    <h2>1. Zásady zpracování údajů</h2>
+    <p>Web Hokejíček neshromažďuje osobní údaje návštěvníků bez jejich vědomí. K poskytnutí údajů může dojít pouze v případě, že uživatel dobrovolně kontaktuje provozovatele (např. e-mailem). Tyto údaje jsou použity výhradně pro účely komunikace a nejsou předávány třetím stranám.</p>
 
-    <section class="panel">
-      <h2>Jaké údaje zpracováváme</h2>
-      <ul>
-        <li><strong>Technické a provozní údaje</strong> (IP adresa, typ prohlížeče, verze OS, timestampy návštěv, URL a referer) pro bezpečnost a provoz webu.</li>
-        <li><strong>Cookies a podobné technologie</strong> pro základní funkce webu (viz níže).</li>
-        <li><strong>Dobrovolně poskytnuté údaje</strong> (např. zprávy zaslané na náš e-mail).</li>
-      </ul>
-    </section>
+    <h2>2. Účel zpracování údajů</h2>
+    <ul>
+      <li>odpověď na dotazy zaslané uživateli,</li>
+      <li>informování o provozu webu a dostupnosti přenosů,</li>
+      <li>zajištění souladu s právními povinnostmi.</li>
+    </ul>
 
-    <section class="panel">
-      <h2>Účely a právní základy zpracování</h2>
-      <ul>
-        <li><strong>Provoz a bezpečnost webu</strong> – oprávněný zájem správce (čl. 6 odst. 1 písm. f) GDPR).</li>
-        <li><strong>Plnění právních povinností</strong> – např. uchovávání logů, spolupráce s orgány (čl. 6 odst. 1 písm. c)).</li>
-        <li><strong>Komunikace s vámi</strong> – když nám napíšete (oprávněný zájem / souhlas dle kontextu).</li>
-      </ul>
-    </section>
+    <h2>3. Práva uživatelů</h2>
+    <p>Každý uživatel, který poskytne své osobní údaje, má v souladu s nařízením GDPR právo:</p>
+    <ul>
+      <li>na přístup k údajům, které o něm provozovatel uchovává,</li>
+      <li>na opravu nepřesných nebo neaktuálních údajů,</li>
+      <li>na výmaz údajů („právo být zapomenut“),</li>
+      <li>na omezení zpracování údajů,</li>
+      <li>na přenositelnost údajů,</li>
+      <li>na podání stížnosti u dozorového úřadu.</li>
+    </ul>
 
-    <section class="panel">
-      <h2>Cookies</h2>
-      <p>
-        Web používá <strong>nezbytné cookies</strong> pro funkčnost (např. nastavení rozhraní). Případné analytické
-        či marketingové cookies nasazujeme pouze v souladu s právními požadavky. V nastavení prohlížeče můžete cookies
-        kdykoliv omezit nebo smazat.
-      </p>
-    </section>
+    <h2>4. Doba uchování údajů</h2>
+    <p>Osobní údaje jsou uchovávány pouze po dobu nezbytnou k naplnění účelu, pro který byly poskytnuty, nebo po dobu vyžadovanou právními předpisy. Poté jsou bezpečně vymazány.</p>
 
-    <section class="panel">
-      <h2>Doba uchování</h2>
-      <ul>
-        <li>Technické logy: obvykle do <strong>30 dní</strong>, není-li nutné delší uchování (např. z důvodu bezpečnosti).</li>
-        <li>Komunikační záznamy (e-mail): po nezbytnou dobu pro vyřízení, max. do uplynutí promlčecích lhůt.</li>
-      </ul>
-    </section>
+    <h2>5. Sdílení a bezpečnost</h2>
+    <p>Data nejsou předávána třetím stranám a nejsou využívána pro marketingové účely. Provozovatel webu přijímá přiměřená technická a organizační opatření, aby zajistil ochranu před neoprávněným přístupem k údajům.</p>
 
-    <section class="panel">
-      <h2>Příjemci a přenosy</h2>
-      <p>
-        Osobní údaje můžeme sdílet s poskytovateli hostingových a technických služeb (zpracovatelé) za účelem provozu webu.
-        Přenosy do třetích zemí mimo EU/EHP probíhají pouze při zajištění odpovídající úrovně ochrany (např. standardní smluvní doložky EU).
-      </p>
-    </section>
+    <h2>6. Kontakt</h2>
+    <p>Pro jakékoliv dotazy ohledně ochrany osobních údajů se můžete obrátit na:</p>
+    <p><strong>E-mail:</strong> <a href="mailto:info@hokejicek.site">info@hokejicek.site</a></p>
 
-    <section class="panel">
-      <h2>Vaše práva</h2>
-      <ul>
-        <li>právo na přístup k údajům,</li>
-        <li>právo na opravu,</li>
-        <li>právo na výmaz („být zapomenut“),</li>
-        <li>právo na omezení zpracování,</li>
-        <li>právo vznést námitku proti zpracování,</li>
-        <li>právo na přenositelnost údajů,</li>
-        <li>právo podat stížnost u ÚOOÚ (<a href="https://www.uoou.cz/" target="_blank" rel="noopener">www.uoou.cz</a>).</li>
-      </ul>
-    </section>
-
-    <section class="panel">
-      <h2>Jak práva uplatnit</h2>
-      <p>
-        Kontaktujte nás na <a href="mailto:info@hokejicek.site" class="block">info@hokejicek.site</a> a uveďte, které právo uplatňujete.
-        Z bezpečnostních důvodů vás můžeme požádat o doplnění informací pro ověření totožnosti.
-      </p>
-    </section>
-
-    <section class="panel">
-      <h2>Změny tohoto dokumentu</h2>
-      <p>
-        Tento dokument můžeme průběžně aktualizovat. Nové znění zveřejníme na této stránce.
-      </p>
-      <p class="muted mono">Verze: 1.0 &nbsp;|&nbsp; Účinné od: 11. 9. 2025</p>
-    </section>
+    <h2>7. Spojení s komunitou Cyber Sticks</h2>
+    <p>Komunitní Discord skupina <strong>Cyber Sticks</strong> je úzce propojena s projektem Hokejíček a má stejného majitele. Údaje, které poskytnete v rámci obou projektů, jsou zpracovávány jednotně.</p>
   </main>
 
+  <!-- Patička -->
   <footer>
-    © 2025 Hokejíček. Všechna práva vyhrazena. |
-    Kontakt: <a href="mailto:info@hokejicek.site">info@hokejicek.site</a>
+    © 2025 Hokejíček
   </footer>
 
 </body>
