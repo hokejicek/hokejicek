@@ -3,100 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hokejíček | Stream 1</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <title>Hokejíček – Stream 1</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #000;
-      color: #fff;
-      text-align: center;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
+    /* Horní lišta */
+    .lowpoly-bg {
+      background: #1a1a1a;
+      border-radius: 0 0 28px 28px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    }
     header {
-      background: linear-gradient(135deg, #111, #1c1c1c);
-      padding: 15px 30px;
+      padding: 16px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    header .logo {
+    .logo {
       font-size: 22px;
-      font-weight: 600;
-      color: #b34cff;
-      text-decoration: none;
+      font-weight: bold;
+      color: #bb86fc;
     }
     nav a {
-      color: #fff;
+      margin-left: 24px;
+      color: #f5f5f5;
+      font-weight: bold;
       text-decoration: none;
-      margin-left: 25px;
-      font-weight: 500;
-      transition: 0.3s;
+      transition: color 0.3s;
     }
-    nav a:hover { color: #b34cff; }
+    nav a:hover {
+      color: #bb86fc;
+    }
 
-    .video-container {
+    /* Obsah streamu */
+    main {
+      flex: 1;
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .video {
+      flex: 3;
+      background: #1e1e1e;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: calc(100vh - 120px);
     }
-    .video-container iframe, video {
-      width: 80%;
-      max-width: 1000px;
-      height: 70vh;
-      border-radius: 12px;
+    .video iframe {
+      width: 100%;
+      height: 100%;
       border: none;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      border-radius: 20px;
+      min-height: 500px;
+    }
+
+    .chat {
+      flex: 1.2;
+      background: #1e1e1e;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat iframe {
+      flex: 1;
+      border: none;
+      min-height: 500px;
     }
 
     footer {
-      background: #111;
-      color: #888;
-      font-size: 14px;
+      background: #1a1a1a;
+      color: #aaa;
       text-align: center;
       padding: 15px;
-      border-top: 1px solid #2d2d2d;
+      border-top: 2px solid #bb86fc;
+      font-size: 14px;
     }
-    footer a { color: #b34cff; text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
   </style>
-
-  <!-- Blokace pravého tlačítka a devtools -->
-  <script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function(e) {
-      if (e.keyCode == 123 || // F12
-          (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || // Ctrl+Shift+I / J
-          (e.ctrlKey && e.keyCode == 85)) { // Ctrl+U
-        return false;
-      }
-    };
-  </script>
 </head>
 <body>
 
-  <header>
-    <a href="https://hokejicek.site" class="logo">HOKEJÍČEK</a>
-    <nav>
-      <a href="/">Hlavní stránka</a>
-      <a href="/gdpr">GDPR</a>
-    </nav>
-  </header>
-
-  <div class="video-container">
-    <!-- Přehrávač -->
-    <video controls autoplay>
-      <source src="https://extra.oneplay.sbs/5867-2923-2847-5907/tracks-v1a1/mono.ts.m3u8" type="application/x-mpegURL">
-      Váš prohlížeč nepodporuje HTML5 video.
-    </video>
+  <!-- Horní lišta -->
+  <div class="lowpoly-bg">
+    <header>
+      <div class="logo">Hokejíček</div>
+      <nav>
+        <a href="index.html">Hlavní stránka</a>
+        <a href="gdpr.html">GDPR</a>
+      </nav>
+    </header>
   </div>
 
+  <!-- Obsah -->
+  <main>
+    <!-- Video přenos -->
+    <div class="video">
+      <iframe src="https://streambetter.cyou/embed/special/CZ/oneplaysport2.php" allowfullscreen></iframe>
+    </div>
+
+    <!-- Chat -->
+    <div class="chat">
+      <iframe src="https://www.youtube.com/live_chat?v=ZpOWCtuZQIU&embed_domain=hokejicek.site"></iframe>
+    </div>
+  </main>
+
+  <!-- Patička -->
   <footer>
-    © 2025 Hokejíček. Všechna práva vyhrazena. | <a href="/gdpr">GDPR</a>
+    © 2025 Hokejíček · Stream 1
   </footer>
-  
+
 </body>
 </html>
