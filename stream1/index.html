@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hokejíček | Stream 1</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
     body {
       margin: 0;
@@ -13,7 +14,6 @@
       color: #fff;
     }
 
-    /* horní lišta */
     header {
       background: linear-gradient(135deg, #111, #1c1c1c);
       padding: 15px 30px;
@@ -26,7 +26,6 @@
       font-size: 22px;
       font-weight: 600;
       color: #b34cff;
-      letter-spacing: 1px;
       text-decoration: none;
     }
     nav a {
@@ -34,11 +33,9 @@
       text-decoration: none;
       margin-left: 25px;
       font-weight: 500;
-      transition: 0.3s;
     }
     nav a:hover { color: #b34cff; }
 
-    /* rozdělení obrazovky */
     .container {
       display: flex;
       flex-direction: row;
@@ -48,11 +45,11 @@
       flex: 1;
       padding: 10px;
     }
-    .video iframe {
+    video {
       width: 100%;
       height: 100%;
-      border: none;
       border-radius: 12px;
+      background: #000;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
 
@@ -65,7 +62,6 @@
       border-radius: 12px;
       overflow: hidden;
       height: 100%;
-      box-shadow: 0 4px 15px rgba(179, 76, 255, 0.3);
       display: flex;
       flex-direction: column;
     }
@@ -94,11 +90,15 @@
     footer a:hover { text-decoration: underline; }
   </style>
 
-  <!-- blokace pravého tlačítka a devtools -->
   <script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('contextmenu', e => e.preventDefault());
     document.onkeydown = function(e) {
-      if(e.keyCode==123 || (e.ctrlKey && e.shiftKey && (e.keyCode==73 || e.keyCode==74)) || (e.ctrlKey && e.keyCode==85)) {
+      if (
+        e.keyCode == 123 ||
+        (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) ||
+        (e.ctrlKey && e.keyCode == 85) ||
+        (e.ctrlKey && e.shiftKey && e.keyCode == 67)
+      ) {
         return false;
       }
     };
@@ -115,23 +115,36 @@
   </header>
 
   <div class="container">
-    <!-- video -->
     <div class="video">
-      <iframe src="https://streambetter.cyou/embed/special/CZ/novasport3.php" allowfullscreen></iframe>
+      <video id="video" controls autoplay></video>
     </div>
 
-    <!-- chat -->
     <div class="chat">
       <div class="chat-box">
         <div class="chat-header">💬 Live Chat</div>
-        <iframe src="https://www.youtube.com/live_chat?v=QzbD9Cy1TNg&embed_domain=hokejicek.site"></iframe>
-      </div>
+<iframe 
+  src="https://www.youtube.com/live_chat?v=QzbD9Cy1TNg&embed_domain=tv.hokejicek.site">
+</iframe>
+</div>
     </div>
   </div>
 
   <footer>
     © 2025 Hokejíček. Všechna práva vyhrazena. | <a href="/gdpr">GDPR</a>
   </footer>
+
+  <script>
+    const video = document.getElementById('video');
+    const src = "https://extra.oneplay.sbs/5867-2923-2847-5907/tracks-v1a1/mono.ts.m3u8";
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(src);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = src;
+    }
+  </script>
 
 </body>
 </html>
