@@ -12,8 +12,10 @@
       font-family: 'Poppins', sans-serif;
       background: #000;
       color: #fff;
+      overflow: hidden;
     }
 
+    /* horní lišta */
     header {
       background: linear-gradient(135deg, #111, #1c1c1c);
       padding: 15px 30px;
@@ -26,6 +28,7 @@
       font-size: 22px;
       font-weight: 600;
       color: #b34cff;
+      letter-spacing: 1px;
       text-decoration: none;
     }
     nav a {
@@ -33,28 +36,35 @@
       text-decoration: none;
       margin-left: 25px;
       font-weight: 500;
+      transition: 0.3s;
     }
     nav a:hover { color: #b34cff; }
 
+    /* rozdělení obrazovky */
     .container {
       display: flex;
       flex-direction: row;
       height: calc(100vh - 70px);
     }
-    .video, .chat {
-      flex: 1;
+    .video {
+      flex: 3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 10px;
     }
     video {
       width: 100%;
       height: 100%;
-      border-radius: 12px;
       background: #000;
+      border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
 
     .chat {
+      flex: 1;
       max-width: 420px;
+      padding: 10px;
     }
     .chat-box {
       background: #151515;
@@ -62,6 +72,7 @@
       border-radius: 12px;
       overflow: hidden;
       height: 100%;
+      box-shadow: 0 4px 15px rgba(179, 76, 255, 0.3);
       display: flex;
       flex-direction: column;
     }
@@ -72,11 +83,41 @@
       text-align: center;
       padding: 8px;
     }
-    .chat-box iframe {
+    #messages {
       flex: 1;
-      width: 100%;
-      border: none;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 14px;
     }
+    #messages p {
+      margin: 5px 0;
+    }
+    form {
+      display: flex;
+      border-top: 1px solid #333;
+    }
+    input, button {
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    #username {
+      width: 25%;
+      background: #222;
+      color: #fff;
+    }
+    #message {
+      flex: 1;
+      background: #111;
+      color: #fff;
+    }
+    button {
+      background: #b34cff;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: #9b3ae6; }
 
     footer {
       background: #111;
@@ -90,17 +131,15 @@
     footer a:hover { text-decoration: underline; }
   </style>
 
+  <!-- Blokace pravého tlačítka a DevTools -->
   <script>
     document.addEventListener('contextmenu', e => e.preventDefault());
     document.onkeydown = function(e) {
       if (
-        e.keyCode == 123 ||
-        (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) ||
-        (e.ctrlKey && e.keyCode == 85) ||
-        (e.ctrlKey && e.shiftKey && e.keyCode == 67)
-      ) {
-        return false;
-      }
+        e.keyCode==123 || // F12
+        (e.ctrlKey && e.shiftKey && (e.keyCode==73 || e.keyCode==74)) || // Ctrl+Shift+I/J
+        (e.ctrlKey && e.keyCode==85) // Ctrl+U
+      ) return false;
     };
   </script>
 </head>
@@ -115,17 +154,22 @@
   </header>
 
   <div class="container">
+    <!-- video -->
     <div class="video">
-      <video id="video" controls autoplay></video>
+      <video id="hls-video" controls autoplay muted></video>
     </div>
 
+    <!-- chat -->
     <div class="chat">
       <div class="chat-box">
         <div class="chat-header">💬 Live Chat</div>
-<iframe 
-  src="https://www.youtube.com/live_chat?v=QzbD9Cy1TNg">
-</iframe>
-</div>
+        <div id="messages"></div>
+        <form id="chatForm">
+          <input type="text" id="username" placeholder="Jméno" required>
+          <input type="text" id="message" placeholder="Napiš zprávu..." required>
+          <button type="submit">Odeslat</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -134,16 +178,41 @@
   </footer>
 
   <script>
-    const video = document.getElementById('video');
-    const src = "https://extra.oneplay.sbs/5867-2923-2847-5907/tracks-v1a1/mono.ts.m3u8";
-
-    if (Hls.isSupported()) {
+    // HLS přehrávač
+    if(Hls.isSupported()) {
+      const video = document.getElementById('hls-video');
       const hls = new Hls();
-      hls.loadSource(src);
+      hls.loadSource("https://extra.oneplay.sbs/5867-2923-2847-5907/tracks-v1a1/mono.ts.m3u8");
       hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = src;
     }
+
+    // CHAT
+    async function loadMessages() {
+      const res = await fetch("chat.php?action=get");
+      const data = await res.json();
+      const box = document.getElementById("messages");
+      box.innerHTML = "";
+      data.forEach(msg => {
+        box.innerHTML += `<p><b>${msg.username}</b>: ${msg.message}</p>`;
+      });
+      box.scrollTop = box.scrollHeight;
+    }
+
+    document.getElementById("chatForm").addEventListener("submit", async e => {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const message = document.getElementById("message").value;
+      await fetch("chat.php?action=send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, message })
+      });
+      document.getElementById("message").value = "";
+      loadMessages();
+    });
+
+    setInterval(loadMessages, 3000);
+    loadMessages();
   </script>
 
 </body>
