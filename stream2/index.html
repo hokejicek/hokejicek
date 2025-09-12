@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hokejíček | Stream 2</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <style>
     body {
       margin: 0;
@@ -26,7 +27,6 @@
       font-size: 22px;
       font-weight: 600;
       color: #b34cff;
-      letter-spacing: 1px;
       text-decoration: none;
     }
     nav a {
@@ -34,52 +34,24 @@
       text-decoration: none;
       margin-left: 25px;
       font-weight: 500;
-      transition: 0.3s;
     }
     nav a:hover { color: #b34cff; }
 
-    /* rozdělení obrazovky */
-    .container {
+    /* video uprostřed */
+    .video-wrapper {
       display: flex;
-      flex-direction: row;
-      height: calc(100vh - 70px);
+      justify-content: center;
+      align-items: center;
+      height: calc(100vh - 130px);
+      background: #000;
     }
-    .video, .chat {
-      flex: 1;
-      padding: 10px;
-    }
-    .video iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
+    video {
+      width: 80%;
+      max-width: 1000px;
+      height: 70%;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-    }
-
-    .chat {
-      max-width: 420px;
-    }
-    .chat-box {
-      background: #151515;
-      border: 2px solid #b34cff;
-      border-radius: 12px;
-      overflow: hidden;
-      height: 100%;
-      box-shadow: 0 4px 15px rgba(179, 76, 255, 0.3);
-      display: flex;
-      flex-direction: column;
-    }
-    .chat-header {
-      background: #b34cff;
-      color: #fff;
-      font-weight: 600;
-      text-align: center;
-      padding: 8px;
-    }
-    .chat-box iframe {
-      flex: 1;
-      width: 100%;
-      border: none;
+      background: #000;
+      box-shadow: 0 4px 20px rgba(179, 76, 255, 0.5);
     }
 
     footer {
@@ -94,13 +66,15 @@
     footer a:hover { text-decoration: underline; }
   </style>
 
-  <!-- blokace pravého tlačítka a devtools -->
+  <!-- Blokace pravého tlačítka a DevTools -->
   <script>
-    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.addEventListener('contextmenu', e => e.preventDefault());
     document.onkeydown = function(e) {
-      if(e.keyCode==123 || (e.ctrlKey && e.shiftKey && (e.keyCode==73 || e.keyCode==74)) || (e.ctrlKey && e.keyCode==85)) {
-        return false;
-      }
+      if (
+        e.keyCode==123 || // F12
+        (e.ctrlKey && e.shiftKey && (e.keyCode==73 || e.keyCode==74)) || // Ctrl+Shift+I/J
+        (e.ctrlKey && e.keyCode==85) // Ctrl+U
+      ) return false;
     };
   </script>
 </head>
@@ -114,24 +88,27 @@
     </nav>
   </header>
 
-  <div class="container">
-    <!-- video -->
-    <div class="video">
-      <iframe src="https://streambetter.cyou/embed/special/CZ/novasport3.php" allowfullscreen></iframe>
-    </div>
-
-    <!-- chat -->
-    <div class="chat">
-      <div class="chat-box">
-        <div class="chat-header">💬 Live Chat</div>
-        <iframe src="https://www.youtube.com/live_chat?v=QzbD9Cy1TNg&embed_domain=hokejicek.site"></iframe>
-      </div>
-    </div>
+  <div class="video-wrapper">
+    <video id="hls-video" controls autoplay></video>
   </div>
 
   <footer>
     © 2025 Hokejíček. Všechna práva vyhrazena. | <a href="/gdpr">GDPR</a>
   </footer>
+
+  <script>
+    const video = document.getElementById('hls-video');
+    // sem vlož odkaz na stream 2
+    const src = "https://streambetter.cyou/embed/special/CZ/ctsport.php";
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(src);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = src;
+    }
+  </script>
 
 </body>
 </html>
