@@ -47,7 +47,7 @@
     }
     nav a:hover { color: #bb86fc; }
 
-    /* Obsah streamu */
+    /* Obsah */
     main {
       flex: 1;
       display: flex;
@@ -58,7 +58,7 @@
       width: 100%;
     }
 
-    /* Video */
+    /* Video přehrávač */
     .video {
       flex: 3;
       position: relative;
@@ -74,15 +74,21 @@
       background: black;
     }
 
+    /* Chat */
     .chat {
       flex: 1.2;
       background: #1e1e1e;
       border-radius: 20px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.7);
       overflow: hidden;
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
     }
-    .chat iframe { flex: 1; border: none; height: 100%; }
+    .chat iframe {
+      flex: 1;
+      border: none;
+      height: 100%;
+    }
 
     footer {
       background: #1a1a1a;
@@ -102,7 +108,7 @@
       <div class="logo">Hokejíček</div>
       <nav>
         <a href="/">Hlavní stránka</a>
-        <a href="/zaznamy/">Záznamy</a>
+        <a href="/zaznamy.html">Záznamy</a>
         <a href="/gdpr.html">GDPR</a>
       </nav>
     </header>
@@ -137,7 +143,7 @@
       hls.loadSource(streamUrl);
       hls.attachMedia(video);
     } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = streamUrl; // Safari a iOS umí HLS nativně
+      video.src = streamUrl; // Safari a iOS mají HLS nativně
     }
   </script>
 </body>
