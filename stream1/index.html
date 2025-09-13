@@ -47,7 +47,7 @@
     }
     nav a:hover { color: #bb86fc; }
 
-    /* Obsah */
+    /* Obsah streamu */
     main {
       flex: 1;
       display: flex;
@@ -67,11 +67,11 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.7);
       overflow: hidden;
     }
-    video {
+    .video iframe {
       width: 100%;
       height: 100%;
       border-radius: 20px;
-      background: black;
+      border: none;
     }
 
     /* Chat */
@@ -118,7 +118,7 @@
   <main>
     <!-- Video přenos -->
     <div class="video">
-      <video id="live" controls autoplay></video>
+      <iframe src="https://streambetter.cyou/play/play.php?id=923" frameborder="0" width="640" height="360" allowfullscreen></iframe>
     </div>
 
     <!-- Chat -->
@@ -132,19 +132,5 @@
     © 2025 Hokejíček – Stream 1
   </footer>
 
-  <!-- HLS player -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-  <script>
-    const video = document.getElementById('live');
-    const streamUrl = "https://n4.tmo.livebox.cz/hl-live/efef7190ae21c7c5dc39b4886ac5105d/sla.smil/chunklist_b6275072.m3u8";
-
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(streamUrl);
-      hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = streamUrl; // Safari a iOS mají HLS nativně
-    }
-  </script>
 </body>
 </html>
