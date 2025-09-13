@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maxa Liga – Slavia Praha vs Třebíč</title>
+  <title>Hokejíček – Hlavní stránka</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #0a0a0a; /* černé pozadí */
+      background: #0a0a0a;
       color: #f5f5f5;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
     }
 
-    /* === Horní lišta === */
+    /* Horní lišta */
     .lowpoly-bg {
-      background: #1a1a1a; /* jednobarevná */
-      clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      background: #1a1a1a;
       border-radius: 0 0 28px 28px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.6);
     }
@@ -42,11 +42,9 @@
       text-decoration: none;
       transition: color 0.3s;
     }
-    nav a:hover {
-      color: #bb86fc;
-    }
+    nav a:hover { color: #bb86fc; }
 
-    /* === Obsah === */
+    /* Box se zápasem */
     main {
       flex: 1;
       display: flex;
@@ -54,78 +52,62 @@
       align-items: center;
       padding: 40px 20px;
     }
-
-    .match-card {
-      background: #1e1e1e; /* jednobarevná karta */
+    .match-box {
+      background: #1e1e1e;
+      border: 2px solid #bb86fc;
       border-radius: 20px;
-      padding: 40px;
+      padding: 30px;
       text-align: center;
       box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-      max-width: 600px;
+      max-width: 500px;
       width: 100%;
-      border: 2px solid #6a0dad;
-      transition: all 0.3s ease;
     }
-
-    /* === Hover efekt === */
-    .match-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 30px rgba(106, 13, 173, 0.9);
-      background: #2a2a2a; /* jen o něco světlejší */
-    }
-
-    .league {
-      font-size: 14px;
-      text-transform: uppercase;
+    .match-box h3 {
       color: #bb86fc;
-      letter-spacing: 1px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
-
     .teams {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 20px 0;
-    }
-
-    .team {
-      flex: 1;
-      text-align: center;
-    }
-
-    .team h2 {
-      margin: 10px 0 0;
       font-size: 22px;
-      color: #fff;
-    }
-
-    .vs {
-      font-size: 26px;
       font-weight: bold;
+      margin: 15px 0;
+    }
+    .teams span {
       color: #bb86fc;
-      margin: 0 20px;
+      margin: 0 12px;
     }
-
-    .info {
-      margin: 20px 0;
+    .details {
+      margin: 15px 0;
       font-size: 16px;
-      color: #ddd;
     }
-
+    .countdown {
+      margin: 20px 0;
+      font-size: 20px;
+      font-weight: bold;
+      color: #bb86fc; /* fialový odpočet */
+    }
     .btn {
       display: inline-block;
-      margin-top: 20px;
-      padding: 14px 28px;
-      background: #007bff; /* modrá */
+      margin-top: 15px;
+      padding: 12px 24px;
+      background: #007bff;
       color: white;
       font-weight: bold;
-      border-radius: 12px;
+      border-radius: 10px;
       text-decoration: none;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.2s;
     }
     .btn:hover {
-      background: #0056b3;
+      background: #0056cc;
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: #1a1a1a;
+      color: #aaa;
+      text-align: center;
+      padding: 15px;
+      border-top: 2px solid #bb86fc;
+      font-size: 14px;
     }
   </style>
 </head>
@@ -136,32 +118,58 @@
     <header>
       <div class="logo">Hokejíček</div>
       <nav>
-        <a href="#">Hlavní stránka</a>
-        <a href="https://hokejicek.site/gdpr.html">GDPR</a>
+        <a href="/">Hlavní stránka</a>
+        <a href="/gdpr.html">GDPR</a>
       </nav>
     </header>
   </div>
 
-  <!-- Obsah -->
+  <!-- Zápas -->
   <main>
-    <div class="match-card">
-      <div class="league">MAXA LIGA – 2. KOLO</div>
+    <div class="match-box">
+      <h3>MAXA LIGA – 2. KOLO</h3>
       <div class="teams">
-        <div class="team">
-          <h2>Slavia Praha</h2>
-        </div>
-        <div class="vs">VS</div>
-        <div class="team">
-          <h2>Třebíč</h2>
-        </div>
+        Slavia Praha <span>VS</span> Třebíč
       </div>
-      <div class="info">
-        🗓️ 13. 9. 2025 – 15:00 <br>
+      <div class="details">
+        📅 13. 9. 2025 – 15:00 <br>
         📍 Zimní stadion Eden (Praha)
       </div>
-      <a href="https://hokejicek.site/stream1/" target="_blank" class="btn">▶ Sleduj přenos</a>
+      <div id="countdown" class="countdown">Načítám odpočet...</div>
+      <a class="btn" href="/stream1/">▶ Sleduj přenos</a>
     </div>
   </main>
+
+  <!-- Patička -->
+  <footer>
+    © 2025 Hokejíček
+  </footer>
+
+  <!-- Odpočet -->
+  <script>
+    const countdownElement = document.getElementById("countdown");
+    const matchDate = new Date("September 13, 2025 15:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = matchDate - now;
+
+      if (distance <= 0) {
+        countdownElement.innerHTML = "Zápas již začal!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
 
 </body>
 </html>
