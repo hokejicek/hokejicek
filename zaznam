@@ -2,10 +2,10 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=/" />
   <title>Přesměrování...</title>
+  <meta http-equiv="refresh" content="0; url=https://hokejicek.site">
 </head>
 <body>
-  <p>Pokud nebudete přesměrováni, <a href="/">klikněte sem</a>.</p>
+  <p>Pokud nebudete přesměrováni, <a href="https://hokejicek.site">klikněte sem</a>.</p>
 </body>
 </html>
