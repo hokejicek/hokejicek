@@ -1,11 +1,195 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <title>Přesměrování...</title>
-  <meta http-equiv="refresh" content="0; url=http://hokejicek.site">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hokejíček – Stránka nenalezena (404)</title>
+  <link rel="icon" type="image/png" href="/favicon.png"/>
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --panel: #1e1e1e;
+      --text: #f5f5f5;
+      --muted: #bdbdbd;
+      --accent: #bb86fc; /* fialová */
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* horní lišta (jednobarevná, low-poly hrana) */
+    .top {
+      background: #1a1a1a;
+      border-bottom: 2px solid var(--accent);
+      border-radius: 0 0 28px 28px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    }
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-weight: 800; color: var(--accent); }
+    .nav a {
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+    .nav a:hover { color: var(--accent); }
+
+    /* obsah */
+    main {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding: 32px 16px;
+    }
+    .card {
+      width: min(780px, 100%);
+      background: var(--panel);
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.7);
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      background: #2a1f2f; /* víc do fialova při hoveru */
+      box-shadow: 0 16px 40px rgba(187,134,252,0.35);
+    }
+
+    .code {
+      font-size: 72px;
+      line-height: 1;
+      margin: 0 0 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--accent);
+    }
+    .title {
+      font-size: 22px;
+      margin: 0 0 8px;
+      font-weight: 700;
+    }
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 18px;
+      word-break: break-all;
+    }
+
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      border: 2px solid transparent;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #100a14;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(187,134,252,0.35);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--accent);
+    }
+    .btn-ghost:hover {
+      background: #2a1f2f;
+      transform: translateY(-2px);
+    }
+
+    .count {
+      margin-top: 10px;
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    footer {
+      background: #1a1a1a;
+      color: #aaa;
+      text-align: center;
+      padding: 14px;
+      border-top: 2px solid var(--accent);
+      font-size: 13px;
+    }
+  </style>
 </head>
 <body>
-  <p>Pokud nebudete přesměrováni, <a href="http://hokejicek.site">klikněte sem</a>.</p>
+
+  <div class="top">
+    <div class="nav">
+      <div class="logo">Hokejíček</div>
+      <nav>
+        <a href="/">Hlavní stránka</a>
+        <a href="/gdpr.html">GDPR</a>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+    <div class="card">
+      <div class="code">404</div>
+      <div class="title">Stránka nenalezena</div>
+      <div id="path" class="muted"></div>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="https://hokejicek.site">Zpět na hlavní stránku</a>
+        <a class="btn btn-ghost" href="mailto:info@hokejicek.site?subject=Chyba%20404">Nahlásit chybu</a>
+      </div>
+
+      <div id="count" class="count"></div>
+    </div>
+  </main>
+
+  <footer>© 2025 Hokejíček</footer>
+
+  <script>
+    // zobraz zadanou cestu
+    const pathEl = document.getElementById('path');
+    pathEl.textContent = `Hledaná adresa: ${location.pathname}`;
+
+    // automatický návrat po krátké chvíli (bez lomítek, jak chceš)
+    let s = 7;
+    const countEl = document.getElementById('count');
+    function tick() {
+      if (s <= 0) {
+        location.href = "https://hokejicek.site";
+        return;
+      }
+      countEl.textContent = `Automaticky přesměrujeme za ${s}s…`;
+      s--;
+      setTimeout(tick, 1000);
+    }
+    tick();
+  </script>
 </body>
 </html>
