@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <title>Hokejíček – Záznamy</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Horní lišta */
+    .lowpoly-bg {
+      background: #1a1a1a;
+      border-radius: 0 0 28px 28px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    }
+    header {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #bb86fc;
+    }
+    nav a {
+      margin-left: 24px;
+      color: #f5f5f5;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #bb86fc; }
+
+    /* Obsah */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    .form-box {
+      background: #1e1e1e;
+      border: 2px solid #bb86fc;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.7);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+    .form-box:hover {
+      transform: translateY(-6px) scale(1.02);
+      background: #2a1f2f;
+    }
+    .form-box h2 {
+      margin-bottom: 15px;
+      color: #bb86fc;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    button {
+      background: #bb86fc;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    button:hover {
+      transform: translateY(-3px);
+      background: #9b5de5;
+    }
+
+    footer {
+      background: #1a1a1a;
+      text-align: center;
+      padding: 15px;
+      border-top: 2px solid #bb86fc;
+      font-size: 14px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Horní lišta -->
+  <div class="lowpoly-bg">
+    <header>
+      <div class="logo">Hokejíček</div>
+      <nav>
+        <a href="/">Hlavní stránka</a>
+        <a href="/gdpr.html">GDPR</a>
+        <a href="/zaznamy/">Záznamy</a>
+      </nav>
+    </header>
+  </div>
+
+  <!-- Obsah -->
+  <main>
+    <div class="form-box">
+      <h2>Zadej tým a datum</h2>
+      <form id="searchForm">
+        <input type="text" id="query" placeholder="např. brno-litvinov-10-9-25" required>
+        <button type="submit">Najít záznam</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Patička -->
+  <footer>© 2025 Hokejíček</footer>
+
+  <!-- Skript na přesměrování -->
+  <script>
+    document.getElementById("searchForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const query = document.getElementById("query").value.trim();
+
+      if (query) {
+        window.location.href = "https://hokejicek.site/zaznam/" + query;
+      } else {
+        window.location.href = "https://hokejicek.site/404.html";
+      }
+    });
+  </script>
+</body>
+</html>
