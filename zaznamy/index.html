@@ -44,77 +44,47 @@
     }
     nav a:hover { color: #bb86fc; }
 
-    /* Obsah */
+    /* Vyhledávač */
     main {
       flex: 1;
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 40px auto;
       padding: 20px;
+      text-align: center;
     }
     h1 {
-      text-align: center;
       color: #bb86fc;
       margin-bottom: 20px;
     }
-
-    /* Vyhledávač */
-    .search-box {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 30px;
-    }
-    .search-box input {
-      padding: 12px 16px;
+    input {
+      padding: 12px 20px;
       width: 80%;
-      max-width: 600px;
+      max-width: 500px;
       border: 2px solid #bb86fc;
-      border-radius: 12px;
+      border-radius: 10px;
       font-size: 16px;
-      background: #1a1a1a;
-      color: #f5f5f5;
+      outline: none;
+    }
+    input:focus {
+      border-color: #ff66ff;
+      box-shadow: 0 0 10px #bb86fc;
     }
 
-    /* Galerie */
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-      gap: 20px;
-    }
-    .card {
+    /* Video box */
+    .video-box {
+      margin-top: 30px;
       background: #1e1e1e;
       border: 2px solid #bb86fc;
-      border-radius: 16px;
+      border-radius: 20px;
       padding: 20px;
       box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-      transition: transform 0.25s ease, background 0.25s ease;
+      display: none;
     }
-    .card:hover {
-      transform: translateY(-6px) scale(1.02);
-      background: #2a1f2f;
-    }
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      color: #f5f5f5;
-    }
-    .card p {
-      margin: 0 0 15px;
-      color: #aaa;
-      font-size: 14px;
-    }
-    .card a {
-      display: block;
-      padding: 10px;
-      text-align: center;
-      background: #007bff;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.2s;
-    }
-    .card a:hover {
-      background: #0056cc;
-      transform: scale(1.05);
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 12px;
     }
 
     footer {
@@ -135,7 +105,7 @@
       <div class="logo">Hokejíček</div>
       <nav>
         <a href="/">Hlavní stránka</a>
-        <a href="/zaznamy/">Záznamy</a>
+        <a href="/zaznamy.html">Záznamy</a>
         <a href="/gdpr.html">GDPR</a>
       </nav>
     </header>
@@ -143,63 +113,11 @@
 
   <!-- Obsah -->
   <main>
-    <h1>🎥 Sestřihy zápasů TELH – 12. 9. 2025</h1>
+    <h1>📽️ Vyhledávání záznamů</h1>
+    <input type="text" id="search" placeholder="Zadejte např. sparta-trinec-12-9-25" onkeydown="if(event.key==='Enter'){showVideo()}">
 
-    <!-- Vyhledávač -->
-    <div class="search-box">
-      <input type="text" id="search" placeholder="🔎 Hledejte tým nebo datum (např. Sparta, 12-9-25)">
-    </div>
-
-    <div class="gallery" id="gallery">
-
-      <div class="card">
-        <h3>Boleslav vs Kometa</h3>
-        <p>12/09/2025</p>
-        <a href="/zaznamy/boleslav-kometa-12-9-25.html">▶ Přehrát</a>
-      </div>
-
-      <div class="card">
-        <h3>Vítkovice vs Kladno</h3>
-        <p>12/09/2025</p>
-        <a href="/zaznamy/vitkovice-kladno-12-9-25.html">▶ Přehrát</a>
-      </div>
-
-      <div class="card">
-        <h3>Liberec vs Pardubice</h3>
-        <p>12/09/2025</p>
-        <a href="/zaznamy/liberec-pardubice-12-9-25.html">▶ Přehrát</a>
-      </div>
-
-      <div class="card">
-        <h3>Hradec vs Motor</h3>
-        <p>12/09/2025</p>
-        <a href="/zaznamy/hradec-motor-12-9-25.html">▶ Přehrát</a>
-      </div>
-
-      <div class="card">
-        <h3>Sparta vs Třinec</h3>
-        <p>12/09/2025</p>
-        <a href="/zaznamy/sparta-trinec-12-9-25.html">▶ Přehrát</a>
-      </div>
-
-      <div class="card">
-        <h3>Olomouc vs Plzeň</h3>
-        <p>12/09/2025</p>
-        <a href="/zaznamy/olomouc-plzen-12-9-25.html">▶ Přehrát</a>
-      </div>
-
-      <div class="card">
-        <h3>Litvínov vs Karlovy Vary</h3>
-        <p>12/09/2025</p>
-        <a href="/zaznamy/litvinov-vary-12-9-25.html">▶ Přehrát</a>
-      </div>
-
-      <div class="card">
-        <h3>Kometa vs Litvínov</h3>
-        <p>10/09/2025</p>
-        <a href="/zaznamy/kometa-litvinov-10-9-25.html">▶ Přehrát</a>
-      </div>
-
+    <div id="videoBox" class="video-box">
+      <iframe id="videoFrame" src="" allowfullscreen></iframe>
     </div>
   </main>
 
@@ -208,18 +126,33 @@
     © 2025 Hokejíček
   </footer>
 
-  <!-- Vyhledávání -->
+  <!-- Skript -->
   <script>
-    const search = document.getElementById("search");
-    const cards = document.querySelectorAll(".card");
+    const videos = {
+      "olomouc-plzen-12-9-25": "https://www.youtube.com/embed/2iWG0yQ81Cg",
+      "hradec-motor-12-9-25": "https://www.youtube.com/embed/7DYhLztqJyw",
+      "vitkovice-kladno-12-9-25": "https://www.youtube.com/embed/UtdBkYejuBU",
+      "sparta-trinec-12-9-25": "https://www.youtube.com/embed/Ack4k3xbMG0",
+      "boleslav-kometa-12-9-25": "https://www.youtube.com/embed/om1t2ErpNjU",
+      "litvinov-kv-12-9-25": "https://www.youtube.com/embed/a_j3_2_5JHM",
+      "liberec-pardubice-12-9-25": "https://www.youtube.com/embed/ZA9bzNtX6p0",
+      "kometa-litvinov-10-9-25": "https://www.youtube.com/embed/E3pUeLNPwVA"
+    };
 
-    search.addEventListener("input", () => {
-      const value = search.value.toLowerCase();
-      cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.style.display = text.includes(value) ? "block" : "none";
-      });
-    });
+    function showVideo() {
+      const key = document.getElementById("search").value.trim().toLowerCase();
+      const videoBox = document.getElementById("videoBox");
+      const videoFrame = document.getElementById("videoFrame");
+
+      if (videos[key]) {
+        videoFrame.src = videos[key];
+        videoBox.style.display = "block";
+      } else {
+        videoBox.style.display = "block";
+        videoFrame.src = "";
+        videoBox.innerHTML = "<p style='color:#ff4444; font-weight:bold;'>❌ Záznam nenalezen!</p>";
+      }
+    }
   </script>
 
 </body>
