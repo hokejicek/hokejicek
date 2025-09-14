@@ -6,152 +6,132 @@
   <title>Hokejíček – Hlavní stránka</title>
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <!-- Reklamní skript MUSÍ být mimo <style> -->
+  <!-- Reklamní skript -->
   <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
 
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0a0a;
+      font-family: 'Roboto', sans-serif;
+      background: #0d0d0d;
       color: #f5f5f5;
     }
 
     /* Horní lišta */
-    .lowpoly-bg {
-      background: #1a1a1a;
-      border-radius: 0 0 28px 28px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
-    }
     header {
-      padding: 16px 24px;
+      background: #111;
+      border-bottom: 2px solid #ff4747;
+      padding: 18px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1200px;
-      margin: 0 auto;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
     .logo {
-      font-size: 22px;
+      font-size: 26px;
       font-weight: bold;
-      color: #bb86fc;
+      color: #ff4747;
     }
     nav a {
-      margin-left: 24px;
-      color: #f5f5f5;
+      margin-left: 25px;
+      color: #eee;
       font-weight: bold;
       text-decoration: none;
       transition: color 0.3s;
     }
-    nav a:hover { color: #bb86fc; }
+    nav a:hover { color: #ff4747; }
 
-    /* Banner oznámení */
-    .banner {
-      background: #1e1e1e;
-      border: 2px solid #bb86fc;
-      border-radius: 14px;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 1100px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.7);
-    }
-    .banner h2 {
-      color: #bb86fc;
-      margin-bottom: 10px;
-    }
-    .banner p {
-      font-size: 15px;
-      line-height: 1.6;
-    }
-    .banner a {
-      color: #bb86fc;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .banner a:hover { text-decoration: underline; }
-
-    /* Titulky sekcí */
+    /* Titulky */
     h1 {
       text-align: center;
-      margin: 40px 0 20px;
-      color: #bb86fc;
+      margin: 35px 0 20px;
+      color: #ff4747;
+      font-size: 2.2em;
     }
 
     /* Grid zápasů */
     .matches {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      gap: 25px;
       max-width: 1200px;
-      margin: 0 auto 40px;
+      margin: 0 auto 50px;
       padding: 20px;
     }
 
     /* Box zápasu */
     .match-box {
-      background: #1e1e1e;
-      border: 2px solid #bb86fc;
-      border-radius: 20px;
-      padding: 20px;
+      background: #1a1a1a;
+      border-radius: 18px;
+      padding: 25px;
       text-align: center;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
-      transition: transform 0.25s ease, background 0.25s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
     .match-box:hover {
-      transform: translateY(-6px) scale(1.02);
-      background: #2a1f2f;
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px rgba(255,71,71,0.5);
     }
     .teams {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
-    .teams span { color: #bb86fc; margin: 0 8px; }
-    .details { font-size: 14px; margin-bottom: 12px; }
-    .countdown { color: #bb86fc; font-weight: bold; margin-bottom: 12px; }
+    .teams span {
+      color: #ff4747;
+      margin: 0 8px;
+    }
+    .details {
+      font-size: 15px;
+      margin-bottom: 14px;
+      color: #ccc;
+    }
+    .countdown {
+      color: #ff4747;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
     .btn {
       display: inline-block;
-      padding: 10px 18px;
-      background: #007bff;
+      padding: 10px 20px;
+      background: #ff4747;
       color: #fff;
       font-weight: bold;
-      border-radius: 10px;
+      border-radius: 12px;
       text-decoration: none;
       transition: background 0.3s, transform 0.2s;
     }
     .btn:hover {
-      background: #0056cc;
+      background: #d93b3b;
       transform: scale(1.05);
     }
 
     footer {
-      background: #1a1a1a;
+      background: #111;
       color: #aaa;
       text-align: center;
       padding: 15px;
-      border-top: 2px solid #bb86fc;
+      border-top: 2px solid #ff4747;
       font-size: 14px;
-      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
   <!-- Horní lišta -->
-  <div class="lowpoly-bg">
-    <header>
-      <div class="logo">Hokejíček</div>
-      <nav>
-        <a href="/">Hlavní stránka</a>
-        <a href="/zaznamy">Záznamy</a>
-        <a href="/gdpr">GDPR</a>
-      </nav>
-    </header>
-  </div>
+  <header>
+    <div class="logo">Hokejíček</div>
+    <nav>
+      <a href="/">Hlavní stránka</a>
+      <a href="/livetv">Live TV</a>
+      <a href="/gdpr">GDPR</a>
+    </nav>
+  </header>
 
   <!-- Nejzajímavější přenosy -->
-  <h1>Nejzajímavější přenosy</h1>
+  <h1>🎥 Nejzajímavější přenosy</h1>
   <div class="matches">
     <div class="match-box">
       <div class="teams">Brno <span>VS</span> Sparta</div>
@@ -167,52 +147,27 @@
     </div>
   </div>
 
-  <!-- Banner -->
-  <div class="banner">
-    <h2>🔥 Novinka: Spustili jsme záznamy!</h2>
-    <p>Pokud jste nestihli včerejší zápas, nezoufejte!  
-    Na stránce <a href="/zaznamy">hokejicek.site/zaznamy</a>  
-    můžete zadat např. <strong>sparta-trinec-12-9-25</strong> a okamžitě se dostanete k záznamu.  
-    <br>Pro správné vyhledání napište vždy <em>(domácí tým – hostující tým – den – měsíc – rok)</em>.  
-    Pokud si nejste jistí názvy, seznam týmů a jejich zkratek najdete zde:  
-    <a href="/extraliga/2025-26/teamy">Týmy TELH</a> 😉</p>
-  </div>
-
   <!-- Všechny přenosy -->
-  <h1>Všechny přenosy</h1>
+  <h1>📺 Všechny přenosy</h1>
   <div class="matches">
-    <div class="match-box">
-      <div class="teams">Brno <span>VS</span> Sparta</div>
-      <div class="details">📅 14. 9. 2025 – 16:30 <br> 📍 Winning Group Arena</div>
-      <div class="countdown" id="count5">Načítám...</div>
-      <a class="btn" href="/stream1/">▶ Sleduj přenos</a>
-    </div>
-
     <div class="match-box">
       <div class="teams">Plzeň <span>VS</span> České Budějovice</div>
       <div class="details">📅 14. 9. 2025 – 16:30 <br> 📍 LOGSPEED CZ Aréna</div>
-      <div class="countdown" id="count6">Načítám...</div>
+      <div class="countdown" id="count3">Načítám...</div>
       <a class="btn" href="/stream5/">▶ Sleduj přenos</a>
     </div>
 
     <div class="match-box">
       <div class="teams">Pardubice <span>VS</span> Mladá Boleslav</div>
       <div class="details">📅 14. 9. 2025 – 17:00 <br> 📍 Enteria Arena</div>
-      <div class="countdown" id="count7">Načítám...</div>
+      <div class="countdown" id="count4">Načítám...</div>
       <a class="btn" href="/stream6/">▶ Sleduj přenos</a>
-    </div>
-
-    <div class="match-box">
-      <div class="teams">Třinec <span>VS</span> Liberec</div>
-      <div class="details">📅 14. 9. 2025 – 17:00 <br> 📍 Werk Arena</div>
-      <div class="countdown" id="count8">Načítám...</div>
-      <a class="btn" href="/stream2/">▶ Sleduj přenos</a>
     </div>
 
     <div class="match-box">
       <div class="teams">Litvínov <span>VS</span> Vítkovice</div>
       <div class="details">📅 14. 9. 2025 – 17:30 <br> 📍 Zimní stadion Ivana Hlinky</div>
-      <div class="countdown" id="count9">Načítám...</div>
+      <div class="countdown" id="count5">Načítám...</div>
       <a class="btn" href="/stream7/">▶ Sleduj přenos</a>
     </div>
   </div>
@@ -252,12 +207,12 @@
     }
     startCountdown("count1", "September 14, 2025 16:30:00");
     startCountdown("count2", "September 14, 2025 17:00:00");
-    startCountdown("count5", "September 14, 2025 16:30:00");
-    startCountdown("count6", "September 14, 2025 16:30:00");
-    startCountdown("count7", "September 14, 2025 17:00:00");
-    startCountdown("count8", "September 14, 2025 17:00:00");
-    startCountdown("count9", "September 14, 2025 17:30:00");
+    startCountdown("count3", "September 14, 2025 16:30:00");
+    startCountdown("count4", "September 14, 2025 17:00:00");
+    startCountdown("count5", "September 14, 2025 17:30:00");
   </script>
 
 </body>
 </html>
+
+
