@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live TV | Hokejíček</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <!-- Reklamní skript (hlavička) -->
+  <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #0d0d0d;
+      color: #f5f5f5;
+    }
+
+    header {
+      background: #111;
+      border-bottom: 2px solid #ff4747;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4747;
+    }
+    nav a {
+      margin-left: 25px;
+      color: #eee;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #ff4747; }
+
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    h1 {
+      color: #ff4747;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+    .channel {
+      background: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      padding: 25px;
+      text-align: center;
+    }
+    .channel h2 {
+      font-size: 18px;
+      color: #ff4747;
+      margin-bottom: 15px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #ff4747;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      background: #d93b3b;
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 15px;
+      border-top: 2px solid #ff4747;
+      font-size: 14px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Horní lišta -->
+  <header>
+    <div class="logo">Hokejíček</div>
+    <nav>
+      <a href="/">Hlavní stránka</a>
+      <a href="/livetv">Live TV</a>
+      <a href="/gdpr">GDPR</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>📺 Live TV – Sportovní kanály</h1>
+
+    <div class="grid">
+      <div class="channel"><h2>Nova Sport 1</h2><a class="btn" href="/livetv/nova1/">▶ Spustit přehrávač</a></div>
+      <div class="channel"><h2>Nova Sport 2</h2><a class="btn" href="/livetv/nova2/">▶ Spustit přehrávač</a></div>
+      <div class="channel"><h2>Nova Sport 3</h2><a class="btn" href="/livetv/nova3/">▶ Spustit přehrávač</a></div>
+      <div class="channel"><h2>Nova Sport 4</h2><a class="btn" href="/livetv/nova4/">▶ Spustit přehrávač</a></div>
+      <div class="channel"><h2>Nova Sport 5</h2><a class="btn" href="/livetv/nova5/">▶ Spustit přehrávač</a></div>
+      <div class="channel"><h2>Nova Sport 6</h2><a class="btn" href="/livetv/nova6/">▶ Spustit přehrávač</a></div>
+
+      <div class="channel"><h2>OnePlay Sport 1</h2><a class="btn" href="/livetv/one1/">▶ Spustit přehrávač</a></div>
+      <div class="channel"><h2>OnePlay Sport 2</h2><a class="btn" href="/livetv/one2/">▶ Spustit přehrávač</a></div>
+      <div class="channel"><h2>OnePlay Sport 3</h2><a class="btn" href="/livetv/one3/">▶ Spustit přehrávač</a></div>
+      <div class="channel"><h2>OnePlay Sport 4</h2><a class="btn" href="/livetv/one4/">▶ Spustit přehrávač</a></div>
+
+      <div class="channel"><h2>ČT Sport</h2><a class="btn" href="/livetv/ctsport/">▶ Spustit přehrávač</a></div>
+      <div class="channel"><h2>Sport 1</h2><a class="btn" href="/livetv/sport1/">▶ Spustit přehrávač</a></div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Hokejíček | info@hokejicek.site
+  </footer>
+
+  <!-- Reklamní skript (patička) -->
+  <script type="text/javascript">
+    aclib.runAutoTag({
+        zoneId: 'zitkptgwk8',
+    });
+  </script>
+</body>
+</html>
+
+
