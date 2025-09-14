@@ -2,73 +2,185 @@
 <html lang="cs">
 <head>
   <meta charset="UTF-8">
-  <title>Hokejíček – Týmy TELH</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hokejíček – Zkratky týmů</title>
   <link rel="icon" type="image/png" href="/favicon.png">
   <style>
     body {
-      background: #0a0a0a;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: #f5f5f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
+
+    .lowpoly-bg {
+      background: #1a1a1a;
+      border-radius: 0 0 28px 28px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+      width: 100%;
+    }
+    header {
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #bb86fc;
+    }
+    nav a {
+      margin-left: 24px;
+      color: #f5f5f5;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #bb86fc; }
+
     table {
+      margin: 40px auto;
       border-collapse: collapse;
       background: #1e1e1e;
-      border: 2px solid #bb86fc;
-      border-radius: 12px;
+      border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-      width: 90%;
-      max-width: 1000px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.7);
     }
     th, td {
-      padding: 12px 20px;
-      text-align: center;
+      padding: 12px 18px;
+      text-align: left;
+      vertical-align: top;
     }
     th {
       background: #2a1f2f;
       color: #bb86fc;
       font-size: 18px;
     }
-    tr:nth-child(even) {
-      background: #2a2a2a;
+    tr {
+      border-bottom: 1px solid #333;
+    }
+    tr:last-child {
+      border-bottom: none;
     }
     tr:hover {
-      background: #3a2a4d;
+      background: #2a2a2a;
       transform: scale(1.01);
       transition: all 0.2s ease-in-out;
     }
-    td {
-      font-size: 15px;
+
+    footer {
+      background: #1a1a1a;
+      color: #aaa;
+      text-align: center;
+      padding: 15px;
+      border-top: 2px solid #bb86fc;
+      font-size: 14px;
+      margin-top: auto;
+      width: 100%;
     }
   </style>
 </head>
 <body>
+
+  <div class="lowpoly-bg">
+    <header>
+      <div class="logo">Hokejíček</div>
+      <nav>
+        <a href="/">Hlavní stránka</a>
+        <a href="/zaznamy.html">Záznamy</a>
+        <a href="/gdpr.html">GDPR</a>
+      </nav>
+    </header>
+  </div>
+
   <table>
     <tr>
-      <th>#</th>
-      <th>Zkráceně</th>
-      <th>Celý název</th>
+      <th>Tým</th>
       <th>Stadion</th>
+      <th>Alternativy (vyhledávání)</th>
     </tr>
-    <tr><td>1</td><td>Plzeň</td><td>HC Škoda Plzeň</td><td>LOGSPEED CZ Aréna</td></tr>
-    <tr><td>2</td><td>Sparta</td><td>HC Sparta Praha</td><td>O2 arena</td></tr>
-    <tr><td>3</td><td>Brno</td><td>HC Kometa Brno</td><td>Winning Group Arena</td></tr>
-    <tr><td>4</td><td>Vítkovice</td><td>HC Vítkovice Ridera</td><td>Ostravar Aréna</td></tr>
-    <tr><td>5</td><td>Pardubice</td><td>HC Dynamo Pardubice</td><td>Enteria Arena</td></tr>
-    <tr><td>6</td><td>Třinec</td><td>HC Oceláři Třinec</td><td>Werk Arena</td></tr>
-    <tr><td>7</td><td>Karlovy</td><td>HC Energie Karlovy Vary</td><td>KV Arena</td></tr>
-    <tr><td>8</td><td>Budějovice</td><td>Madeta Motor České Budějovice</td><td>Budvar Aréna</td></tr>
-    <tr><td>9</td><td>Liberec</td><td>Bílí Tygři Liberec</td><td>Home Credit Arena</td></tr>
-    <tr><td>10</td><td>Boleslav</td><td>BK Mladá Boleslav</td><td>ŠKO-ENERGO Aréna</td></tr>
-    <tr><td>11</td><td>Kladno</td><td>Rytíři Kladno</td><td>ČEZ Stadion</td></tr>
-    <tr><td>12</td><td>Litvínov</td><td>HC VERVA Litvínov</td><td>Zimní stadion Ivana Hlinky</td></tr>
-    <tr><td>13</td><td>Hradec</td><td>Mountfield HK</td><td>ČPP Arena</td></tr>
-    <tr><td>14</td><td>Olomouc</td><td>HC Olomouc</td><td>ZS Olomouc</td></tr>
+    <tr>
+      <td>HC Sparta Praha</td>
+      <td>O2 Arena (Praha)</td>
+      <td>sparta, spa</td>
+    </tr>
+    <tr>
+      <td>HC Oceláři Třinec</td>
+      <td>Werk Aréna (Třinec)</td>
+      <td>trinec, tri</td>
+    </tr>
+    <tr>
+      <td>HC Vítkovice Ridera</td>
+      <td>Ostravar Aréna (Ostrava)</td>
+      <td>vitkovice, vit</td>
+    </tr>
+    <tr>
+      <td>Bílí Tygři Liberec</td>
+      <td>Home Credit Aréna (Liberec)</td>
+      <td>liberec, lib</td>
+    </tr>
+    <tr>
+      <td>HC VERVA Litvínov</td>
+      <td>ZS Ivana Hlinky (Litvínov)</td>
+      <td>litvinov, lit</td>
+    </tr>
+    <tr>
+      <td>HC Energie Karlovy Vary</td>
+      <td>Mattoni Aréna (Karlovy Vary)</td>
+      <td>karlovy-vary, vary, kv</td>
+    </tr>
+    <tr>
+      <td>HC Olomouc</td>
+      <td>Zimní stadion (Olomouc)</td>
+      <td>olomouc, olo</td>
+    </tr>
+    <tr>
+      <td>Rytíři Kladno</td>
+      <td>ČEZ Stadion (Kladno)</td>
+      <td>kladno, kla</td>
+    </tr>
+    <tr>
+      <td>Mountfield HK</td>
+      <td>ČPP Aréna (Hradec Králové)</td>
+      <td>hradec, hk, mountfield, mount</td>
+    </tr>
+    <tr>
+      <td>HC Kometa Brno</td>
+      <td>Winning Group Aréna (Brno)</td>
+      <td>brno, kometa, kom</td>
+    </tr>
+    <tr>
+      <td>HC Škoda Plzeň</td>
+      <td>LOGSPEED CZ Aréna (Plzeň)</td>
+      <td>plzen, plz</td>
+    </tr>
+    <tr>
+      <td>HC Motor České Budějovice</td>
+      <td>Budvar Aréna (České Budějovice)</td>
+      <td>motor, budejovice, cb</td>
+    </tr>
+    <tr>
+      <td>HC Dynamo Pardubice</td>
+      <td>Enteria Aréna (Pardubice)</td>
+      <td>pardubice, pardubky, par</td>
+    </tr>
+    <tr>
+      <td>BK Mladá Boleslav</td>
+      <td>ŠKO-ENERGO Aréna (Mladá Boleslav)</td>
+      <td>boleslav, mb</td>
+    </tr>
   </table>
+
+  <footer>
+    © 2025 Hokejíček
+  </footer>
+
 </body>
 </html>
