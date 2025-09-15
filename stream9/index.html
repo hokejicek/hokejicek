@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream 9 | Hokejíček</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+
+  <!-- Reklamní skript (hlavička) -->
+  <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #0d0d0d;
+      color: #f5f5f5;
+      overflow-x: hidden;
+    }
+    header {
+      background: #111;
+      border-bottom: 2px solid #ff4747;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 24px; font-weight: bold; color: #ff4747; }
+    nav a {
+      margin-left: 25px; color: #eee; font-weight: bold; text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #ff4747; }
+
+    main { padding: 30px; }
+    h1 {
+      color: #ff4747;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    /* Layout video + chat */
+    .stream-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .player, .chat {
+      background: #1a1a1a;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      overflow: hidden;
+    }
+    .player iframe {
+      width: 900px;
+      height: 600px;
+      border: none;
+      display: block;
+    }
+    .chat iframe {
+      width: 350px;   /* pevná šířka, žádný posuvník */
+      height: 600px;  /* pevná výška, žádný posuvník */
+      border: none;
+      display: block;
+    }
+
+    footer {
+      background: #111; color: #aaa; text-align: center;
+      padding: 15px; border-top: 2px solid #ff4747; margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Horní lišta -->
+  <header>
+    <div class="logo">Hokejíček</div>
+    <nav>
+      <a href="/">Hlavní stránka</a>
+      <a href="/livetv">Live TV</a>
+      <a href="/gdpr">GDPR</a>
+    </nav>
+  </header>
+
+  <!-- Obsah -->
+  <main>
+    <h1>Stream 9 – Live</h1>
+    <div class="stream-container">
+      <!-- Video -->
+      <div class="player">
+        <iframe src="https://streambetter.cyou/play/play.php?id=710" frameborder="0" width="640" height="360" allowfullscreen></iframe>
+      </div>
+      <!-- Chat -->
+      <div class="chat">
+        <iframe src="https://www.youtube.com/live_chat?v=ZpOWCtuZQIU&embed_domain=hokejicek.site"></iframe>
+      </div>
+    </div>
+  </main>
+
+  <!-- Patička -->
+  <footer>
+    © 2025 Hokejíček | info@hokejicek.site
+  </footer>
+
+  <!-- Reklamní skript (patička) -->
+  <script type="text/javascript">
+    aclib.runAutoTag({
+        zoneId: 'zitkptgwk8',
+    });
+  </script>
+</body>
+</html>
+
