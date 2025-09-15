@@ -6,7 +6,7 @@
   <title>Hokejíček – Hlavní stránka</title>
   <link rel="icon" type="image/png" href="/favicon.png">
 
-  <!-- Reklamní skript (hlavička) -->
+  <!-- Reklamní skript -->
   <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
 
   <style>
@@ -17,6 +17,7 @@
       color: #f5f5f5;
     }
 
+    /* Horní lišta */
     header {
       background: #111;
       border-bottom: 2px solid #ff4747;
@@ -39,6 +40,7 @@
     }
     nav a:hover { color: #ff4747; }
 
+    /* Titulky */
     h1 {
       text-align: center;
       margin: 35px 0 20px;
@@ -46,19 +48,61 @@
       font-size: 2em;
     }
 
+    /* Grid zápasů */
     .matches {
-      max-width: 1000px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
       margin: 0 auto 50px;
       padding: 20px;
-      text-align: center;
     }
-    .no-matches {
+
+    /* Box zápasu */
+    .match-box {
       background: #1a1a1a;
-      border-radius: 12px;
-      padding: 30px;
-      font-size: 18px;
-      color: #ccc;
+      border-radius: 18px;
+      padding: 25px;
+      text-align: center;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .match-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px rgba(255,71,71,0.5);
+    }
+    .teams {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .teams span {
+      color: #ff4747;
+      margin: 0 8px;
+    }
+    .details {
+      font-size: 15px;
+      margin-bottom: 14px;
+      color: #ccc;
+    }
+    .countdown {
+      color: #ff4747;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #ff4747;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      background: #d93b3b;
+      transform: scale(1.05);
     }
 
     footer {
@@ -86,25 +130,81 @@
   <!-- Nejzajímavější přenosy -->
   <h1>🎥 Nejzajímavější přenosy</h1>
   <div class="matches">
-    <div class="no-matches">Momentálně nejsou k dispozici žádné přenosy.</div>
+    <div class="match-box">
+      <div class="teams">Opava <span>VS</span> Baník Ostrava B</div>
+      <div class="details">📅 15. 9. 2025 – 17:00 <br> 📍 Simply Aréna (Opava)</div>
+      <div class="countdown" id="count1">Načítám...</div>
+      <a class="btn" href="/stream1/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Verona <span>VS</span> Cremonese</div>
+      <div class="details">📅 15. 9. 2025 – 18:30 <br> 📍 Stadio Marc'Antonio Bentegodi (Verona)</div>
+      <div class="countdown" id="count2">Načítám...</div>
+      <a class="btn" href="/stream2/">▶ Sleduj přenos</a>
+    </div>
   </div>
 
   <!-- Všechny přenosy -->
   <h1>📺 Všechny přenosy</h1>
   <div class="matches">
-    <div class="no-matches">Žádné přenosy nejsou momentálně v programu.</div>
+    <div class="match-box">
+      <div class="teams">Opava <span>VS</span> Baník Ostrava B</div>
+      <div class="details">📅 15. 9. 2025 – 17:00 <br> 📍 Simply Aréna (Opava)</div>
+      <div class="countdown" id="count3">Načítám...</div>
+      <a class="btn" href="/stream1/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Verona <span>VS</span> Cremonese</div>
+      <div class="details">📅 15. 9. 2025 – 18:30 <br> 📍 Stadio Marc'Antonio Bentegodi (Verona)</div>
+      <div class="countdown" id="count4">Načítám...</div>
+      <a class="btn" href="/stream2/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Espanyol <span>VS</span> Mallorca</div>
+      <div class="details">📅 15. 9. 2025 – 21:00 <br> 📍 RCDE Stadium (Cornella de Llobregat)</div>
+      <div class="countdown" id="count5">Načítám...</div>
+      <a class="btn" href="/stream3/">▶ Sleduj přenos</a>
+    </div>
   </div>
 
   <!-- Patička -->
   <footer>
-    © 2025 Hokejíček | info@hokejicek.site
+    © 2025 Hokejíček
   </footer>
 
-  <!-- Reklamní skript (patička) -->
+  <!-- Reklama -->
   <script type="text/javascript">
     aclib.runAutoTag({
         zoneId: 'zitkptgwk8',
     });
+  </script>
+
+  <!-- Odpočty -->
+  <script>
+    function startCountdown(id, dateStr) {
+      const el = document.getElementById(id);
+      const matchDate = new Date(dateStr).getTime();
+      function update() {
+        const now = new Date().getTime();
+        const dist = matchDate - now;
+        if (dist <= 0) {
+          el.innerHTML = "Zápas začal!";
+          return;
+        }
+        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((dist % (1000 * 60)) / 1000);
+        el.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+      }
+      setInterval(update, 1000);
+      update();
+    }
+    startCountdown("count1", "September 15, 2025 17:00:00");
+    startCountdown("count2", "September 15, 2025 18:30:00");
+    startCountdown("count3", "September 15, 2025 17:00:00");
+    startCountdown("count4", "September 15, 2025 18:30:00");
+    startCountdown("count5", "September 15, 2025 21:00:00");
   </script>
 
 </body>
