@@ -31,16 +31,14 @@
     }
     nav a:hover { color: #ff4747; }
 
-    main {
-      padding: 30px;
-    }
+    main { padding: 30px; }
     h1 {
       color: #ff4747;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
       text-align: center;
     }
 
-    /* Rozložení video + chat */
+    /* Layout video + chat */
     .stream-container {
       display: flex;
       justify-content: center;
@@ -61,7 +59,7 @@
     }
     .chat iframe {
       width: 350px;
-      height: 450px;
+      height: 650px; /* vyšší chat než video */
       border: none;
       display: block;
     }
@@ -74,6 +72,7 @@
 </head>
 <body>
 
+  <!-- Horní lišta -->
   <header>
     <div class="logo">Hokejíček</div>
     <nav>
@@ -83,10 +82,11 @@
     </nav>
   </header>
 
+  <!-- Obsah -->
   <main>
     <h1>Stream 1 – Live</h1>
     <div class="stream-container">
-      <!-- Video přehrávač -->
+      <!-- Video -->
       <div class="player">
         <iframe src="https://streambetter.cyou/play/play.php?id=23" allowfullscreen></iframe>
       </div>
@@ -97,6 +97,7 @@
     </div>
   </main>
 
+  <!-- Patička -->
   <footer>
     © 2025 Hokejíček | info@hokejicek.site
   </footer>
