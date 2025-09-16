@@ -10,27 +10,107 @@
   <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
 
   <style>
-    body { margin:0; font-family:'Roboto',sans-serif; background:#0d0d0d; color:#f5f5f5; }
-    header { background:#111; border-bottom:2px solid #ff4747; padding:18px 40px; display:flex; justify-content:space-between; align-items:center; }
-    .logo { font-size:26px; font-weight:bold; color:#ff4747; }
-    nav a { margin-left:25px; color:#eee; font-weight:bold; text-decoration:none; transition:0.3s; }
-    nav a:hover { color:#ff4747; }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: #0d0d0d;
+      color: #f5f5f5;
+    }
 
-    h1 { text-align:center; margin:35px 0 20px; color:#ff4747; font-size:2em; }
-    .matches { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; max-width:1300px; margin:0 auto 50px; padding:20px; }
-    .match-box { background:#1a1a1a; border-radius:14px; padding:20px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.5); transition:0.25s; }
-    .match-box:hover { transform:translateY(-5px); box-shadow:0 0 20px rgba(255,71,71,0.5); }
-    .teams { font-size:18px; font-weight:bold; margin-bottom:10px; }
-    .teams span { color:#ff4747; margin:0 6px; }
-    .details { font-size:14px; margin-bottom:12px; color:#ccc; }
-    .countdown { color:#ff4747; font-weight:bold; margin-bottom:12px; }
-    .btn { display:inline-block; padding:8px 16px; background:#ff4747; color:#fff; font-weight:bold; border-radius:10px; text-decoration:none; transition:0.3s; }
-    .btn:hover { background:#d93b3b; transform:scale(1.05); }
-    footer { background:#111; color:#aaa; text-align:center; padding:15px; border-top:2px solid #ff4747; font-size:14px; }
+    header {
+      background: #111;
+      border-bottom: 2px solid #ff4747;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #ff4747;
+    }
+    nav a {
+      margin-left: 25px;
+      color: #eee;
+      font-weight: bold;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #ff4747; }
+
+    h1 {
+      text-align: center;
+      margin: 35px 0 20px;
+      color: #ff4747;
+      font-size: 2em;
+    }
+
+    .matches {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1300px;
+      margin: 0 auto 50px;
+      padding: 20px;
+    }
+
+    .match-box {
+      background: #1a1a1a;
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .match-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px rgba(255,71,71,0.5);
+    }
+    .teams {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .teams span { color: #ff4747; margin: 0 6px; }
+    .details {
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: #ccc;
+    }
+    .countdown {
+      color: #ff4747;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #ff4747;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn:hover {
+      background: #d93b3b;
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: #111;
+      color: #aaa;
+      text-align: center;
+      padding: 15px;
+      border-top: 2px solid #ff4747;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Horní lišta -->
   <header>
     <div class="logo">Hokejíček</div>
     <nav>
@@ -46,82 +126,183 @@
     <div class="match-box">
       <div class="teams">Sparta Praha <span>VS</span> Karlovy Vary 🏒</div>
       <div class="details">📅 16. 9. 2025 – 18:30 <br> 📍 O2 Arena (Praha)</div>
-      <div class="countdown" id="count7">Načítám...</div>
-      <a class="btn" href="/stream7/">▶ Sleduj přenos</a>
+      <div class="countdown" id="count1">Načítám...</div>
+      <a class="btn" href="/stream1/">▶ Sleduj přenos</a>
     </div>
     <div class="match-box">
       <div class="teams">Real Madrid <span>VS</span> Marseille ⚽</div>
       <div class="details">📅 16. 9. 2025 – 21:00 <br> 📍 Santiago Bernabéu (Madrid)</div>
-      <div class="countdown" id="count18">Načítám...</div>
-      <a class="btn" href="/stream18/">▶ Sleduj přenos</a>
+      <div class="countdown" id="count2">Načítám...</div>
+      <a class="btn" href="/stream2/">▶ Sleduj přenos</a>
     </div>
   </div>
 
   <!-- Všechny přenosy -->
   <h1>📺 Všechny přenosy</h1>
   <div class="matches">
+    <!-- Fotbal MOL Cup -->
+    <div class="match-box">
+      <div class="teams">Lanžhot <span>VS</span> Viktoria Plzeň ⚽</div>
+      <div class="details">📅 16. 9. 2025 – 16:00 <br> 📍 Stadion Na Šlajsi (Lanžhot)</div>
+      <div class="countdown" id="count3">Načítám...</div>
+      <a class="btn" href="/stream3/">▶ Sleduj přenos</a>
+    </div>
 
-    <div class="match-box"><div class="teams">Lanžhot <span>VS</span> Viktoria Plzeň ⚽</div><div class="details">📅 16. 9. 2025 – 16:00 <br> 📍 Stadion Na Šlajsi (Lanžhot)</div><div class="countdown" id="count1">Načítám...</div><a class="btn" href="/stream1/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">B. Bystrica <span>VS</span> Poprad 🏒</div><div class="details">📅 16. 9. 2025 – 17:30 <br> 📍 ZS Banská Bystrica</div><div class="countdown" id="count2">Načítám...</div><a class="btn" href="/stream2/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Michalovce <span>VS</span> Košice 🏒</div><div class="details">📅 16. 9. 2025 – 17:30 <br> 📍 ZS Michalovce</div><div class="countdown" id="count3">Načítám...</div><a class="btn" href="/stream3/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Žilina <span>VS</span> Prešov 🏒</div><div class="details">📅 16. 9. 2025 – 17:30 <br> 📍 Niké Aréna</div><div class="countdown" id="count4">Načítám...</div><a class="btn" href="/stream4/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Lipt. Mikuláš <span>VS</span> Spišská N. Ves 🏒</div><div class="details">📅 16. 9. 2025 – 18:00 <br> 📍 JL Aréna</div><div class="countdown" id="count5">Načítám...</div><a class="btn" href="/stream5/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Trenčín <span>VS</span> Zvolen 🏒</div><div class="details">📅 16. 9. 2025 – 18:00 <br> 📍 ZS Pavla Demitry</div><div class="countdown" id="count6">Načítám...</div><a class="btn" href="/stream6/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Sparta Praha <span>VS</span> Karlovy Vary 🏒</div><div class="details">📅 16. 9. 2025 – 18:30 <br> 📍 O2 Arena (Praha)</div><div class="countdown" id="count7">Načítám...</div><a class="btn" href="/stream7/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Slovan Bratislava <span>VS</span> Nitra 🏒</div><div class="details">📅 16. 9. 2025 – 18:30 <br> 📍 ZS Ondřeje Nepely</div><div class="countdown" id="count8">Načítám...</div><a class="btn" href="/stream8/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Mountfield HK <span>VS</span> Plzeň 🏒</div><div class="details">📅 16. 9. 2025 – 18:00 <br> 📍 ČPP Aréna (HK)</div><div class="countdown" id="count9">Načítám...</div><a class="btn" href="/stream9/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Ath. Bilbao <span>VS</span> Arsenal ⚽</div><div class="details">📅 16. 9. 2025 – 18:45 <br> 📍 San Mamés (Bilbao)</div><div class="countdown" id="count10">Načítám...</div><a class="btn" href="/stream10/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">PSV <span>VS</span> Royale Union SG ⚽</div><div class="details">📅 16. 9. 2025 – 18:45 <br> 📍 Philips Stadion (Eindhoven)</div><div class="countdown" id="count11">Načítám...</div><a class="btn" href="/stream11/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Benfica <span>VS</span> Karabach ⚽</div><div class="details">📅 16. 9. 2025 – 21:00 <br> 📍 Estádio da Luz (Lisabon)</div><div class="countdown" id="count12">Načítám...</div><a class="btn" href="/stream12/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Juventus <span>VS</span> Dortmund ⚽</div><div class="details">📅 16. 9. 2025 – 21:00 <br> 📍 Allianz Stadium (Turín)</div><div class="countdown" id="count13">Načítám...</div><a class="btn" href="/stream13/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Real Madrid <span>VS</span> Marseille ⚽</div><div class="details">📅 16. 9. 2025 – 21:00 <br> 📍 Santiago Bernabéu (Madrid)</div><div class="countdown" id="count14">Načítám...</div><a class="btn" href="/stream14/">▶ Sleduj přenos</a></div>
-    <div class="match-box"><div class="teams">Tottenham <span>VS</span> Villarreal ⚽</div><div class="details">📅 16. 9. 2025 – 21:00 <br> 📍 Tottenham Stadium (Londýn)</div><div class="countdown" id="count15">Načítám...</div><a class="btn" href="/stream15/">▶ Sleduj přenos</a></div>
+    <!-- TELH -->
+    <div class="match-box">
+      <div class="teams">České Budějovice <span>VS</span> Pardubice 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 17:30 <br> 📍 Budvar Aréna (České Budějovice)</div>
+      <div class="countdown" id="count4">Načítám...</div>
+      <a class="btn" href="/stream4/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Mladá Boleslav <span>VS</span> Třinec 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 17:30 <br> 📍 ŠKO-ENERGO Aréna (Mladá Boleslav)</div>
+      <div class="countdown" id="count5">Načítám...</div>
+      <a class="btn" href="/stream5/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Kometa Brno <span>VS</span> Vítkovice 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 18:00 <br> 📍 Winning Group Aréna (Brno)</div>
+      <div class="countdown" id="count6">Načítám...</div>
+      <a class="btn" href="/stream6/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Liberec <span>VS</span> Litvínov 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 18:00 <br> 📍 Home Credit Aréna (Liberec)</div>
+      <div class="countdown" id="count7">Načítám...</div>
+      <a class="btn" href="/stream7/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Mountfield HK <span>VS</span> Plzeň 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 18:00 <br> 📍 ČPP Aréna (Hradec Králové)</div>
+      <div class="countdown" id="count8">Načítám...</div>
+      <a class="btn" href="/stream8/">▶ Sleduj přenos</a>
+    </div>
 
+    <!-- Slovensko -->
+    <div class="match-box">
+      <div class="teams">B. Bystrica <span>VS</span> Poprad 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 17:30 <br> 📍 Zimní stadion Banská Bystrica</div>
+      <div class="countdown" id="count9">Načítám...</div>
+      <a class="btn" href="/stream9/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Michalovce <span>VS</span> Košice 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 17:30 <br> 📍 Zimní stadion Michalovce</div>
+      <div class="countdown" id="count10">Načítám...</div>
+      <a class="btn" href="/stream10/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Žilina <span>VS</span> Prešov 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 17:30 <br> 📍 Niké Aréna (Žilina)</div>
+      <div class="countdown" id="count11">Načítám...</div>
+      <a class="btn" href="/stream11/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Lipt. Mikuláš <span>VS</span> Spišská N. Ves 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 18:00 <br> 📍 JL Aréna (Liptovský Mikuláš)</div>
+      <div class="countdown" id="count12">Načítám...</div>
+      <a class="btn" href="/stream12/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Trenčín <span>VS</span> Zvolen 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 18:00 <br> 📍 Zimní stadion Pavla Demitry (Trenčín)</div>
+      <div class="countdown" id="count13">Načítám...</div>
+      <a class="btn" href="/stream13/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Slovan Bratislava <span>VS</span> Nitra 🏒</div>
+      <div class="details">📅 16. 9. 2025 – 18:30 <br> 📍 Zimní stadion Ondřeje Nepely (Bratislava)</div>
+      <div class="countdown" id="count14">Načítám...</div>
+      <a class="btn" href="/stream14/">▶ Sleduj přenos</a>
+    </div>
+
+    <!-- Liga mistrů -->
+    <div class="match-box">
+      <div class="teams">Ath. Bilbao <span>VS</span> Arsenal ⚽</div>
+      <div class="details">📅 16. 9. 2025 – 18:45 <br> 📍 Estadio San Mamés (Bilbao)</div>
+      <div class="countdown" id="count15">Načítám...</div>
+      <a class="btn" href="/stream15/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">PSV <span>VS</span> Royale Union SG ⚽</div>
+      <div class="details">📅 16. 9. 2025 – 18:45 <br> 📍 Philips Stadion (Eindhoven)</div>
+      <div class="countdown" id="count16">Načítám...</div>
+      <a class="btn" href="/stream16/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Benfica <span>VS</span> Karabach ⚽</div>
+      <div class="details">📅 16. 9. 2025 – 21:00 <br> 📍 Estádio da Luz (Lisabon)</div>
+      <div class="countdown" id="count17">Načítám...</div>
+      <a class="btn" href="/stream17/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Juventus <span>VS</span> Dortmund ⚽</div>
+      <div class="details">📅 16. 9. 2025 – 21:00 <br> 📍 Allianz Stadium (Turín)</div>
+      <div class="countdown" id="count18">Načítám...</div>
+      <a class="btn" href="/stream18/">▶ Sleduj přenos</a>
+    </div>
+    <div class="match-box">
+      <div class="teams">Tottenham <span>VS</span> Villarreal ⚽</div>
+      <div class="details">📅 16. 9. 2025 – 21:00 <br> 📍 Tottenham Hotspur Stadium (Londýn)</div>
+      <div class="countdown" id="count19">Načítám...</div>
+      <a class="btn" href="/stream19/">▶ Sleduj přenos</a>
+    </div>
   </div>
 
-  <footer>© 2025 Hokejíček</footer>
+  <!-- Patička -->
+  <footer>
+    © 2025 Hokejíček
+  </footer>
 
-  <!-- Reklama -->
-  <script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'zitkptgwk8',
-
-  <!-- Odpočty -->
+  <!-- Odpočty + reklama -->
   <script>
-    function startCountdown(id,dateStr){
-      const el=document.getElementById(id);
-      const matchDate=new Date(dateStr).getTime();
-      function update(){
-        const now=new Date().getTime();
-        const dist=matchDate-now;
-        if(dist<=0){el.innerHTML="Zápas začal!";return;}
-        const d=Math.floor(dist/(1000*60*60*24));
-        const h=Math.floor((dist%(1000*60*60*24))/(1000*60*60));
-        const m=Math.floor((dist%(1000*60*60))/(1000*60));
-        const s=Math.floor((dist%(1000*60))/1000);
-        el.innerHTML=`${d}d ${h}h ${m}m ${s}s`;
+    function startCountdown(id, dateStr) {
+      const el = document.getElementById(id);
+      const matchDate = new Date(dateStr).getTime();
+      function update() {
+        const now = new Date().getTime();
+        const dist = matchDate - now;
+        if (dist <= 0) {
+          el.innerHTML = "Zápas začal!";
+          return;
+        }
+        const d = Math.floor(dist / (1000 * 60 * 60 * 24));
+        const h = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((dist % (1000 * 60)) / 1000);
+        el.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
       }
-      update(); setInterval(update,1000);
+      setInterval(update, 1000);
+      update();
     }
 
-    window.onload=function(){
-      startCountdown("count1","September 16, 2025 16:00:00");
-      startCountdown("count2","September 16, 2025 17:30:00");
-      startCountdown("count3","September 16, 2025 17:30:00");
-      startCountdown("count4","September 16, 2025 17:30:00");
-      startCountdown("count5","September 16, 2025 18:00:00");
-      startCountdown("count6","September 16, 2025 18:00:00");
-      startCountdown("count7","September 16, 2025 18:30:00");
-      startCountdown("count8","September 16, 2025 18:30:00");
-      startCountdown("count9","September 16, 2025 18:00:00");
-      startCountdown("count10","September 16, 2025 18:45:00");
-      startCountdown("count11","September 16, 2025 18:45:00");
-      startCountdown("count12","September 16, 2025 21:00:00");
-      startCountdown("count13","September 16, 2025 21:00:00");
-      startCountdown("count14","September 16, 2025 21:00:00");
-      startCountdown("count15","September 16, 2025 21:00:00");
-    }
+    window.addEventListener("load", function() {
+      // Reklama
+      aclib.runAutoTag({ zoneId: "zitkptgwk8" });
+
+      // Odpočty
+      startCountdown("count1", "September 16, 2025 18:30:00");
+      startCountdown("count2", "September 16, 2025 21:00:00");
+      startCountdown("count3", "September 16, 2025 16:00:00");
+      startCountdown("count4", "September 16, 2025 17:30:00");
+      startCountdown("count5", "September 16, 2025 17:30:00");
+      startCountdown("count6", "September 16, 2025 18:00:00");
+      startCountdown("count7", "September 16, 2025 18:00:00");
+      startCountdown("count8", "September 16, 2025 18:00:00");
+      startCountdown("count9", "September 16, 2025 17:30:00");
+      startCountdown("count10", "September 16, 2025 17:30:00");
+      startCountdown("count11", "September 16, 2025 17:30:00");
+      startCountdown("count12", "September 16, 2025 18:00:00");
+      startCountdown("count13", "September 16, 2025 18:00:00");
+      startCountdown("count14", "September 16, 2025 18:30:00");
+      startCountdown("count15", "September 16, 2025 18:45:00");
+      startCountdown("count16", "September 16, 2025 18:45:00");
+      startCountdown("count17", "September 16, 2025 21:00:00");
+      startCountdown("count18", "September 16, 2025 21:00:00");
+      startCountdown("count19", "September 16, 2025 21:00:00");
+    });
   </script>
-
 </body>
 </html>
