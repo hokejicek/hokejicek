@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stream 7 | Hokejíček</title>
+  <title>Stream 4 | Hokejíček</title>
   <link rel="icon" type="image/png" href="/favicon.png">
 
   <!-- Reklamní skript (hlavička) -->
   <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+
+  <!-- HLS.js pro M3U8 -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
   <style>
     body {
@@ -54,15 +57,15 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
       overflow: hidden;
     }
-    .player iframe {
+    video {
       width: 900px;
       height: 600px;
-      border: none;
       display: block;
+      background: black;
     }
     .chat iframe {
-      width: 350px;   /* pevná šířka, žádný posuvník */
-      height: 600px;  /* pevná výška, žádný posuvník */
+      width: 350px;
+      height: 600px;
       border: none;
       display: block;
     }
@@ -87,11 +90,11 @@
 
   <!-- Obsah -->
   <main>
-    <h1>Stream 7 – Live</h1>
+    <h1>Stream 4 – Live</h1>
     <div class="stream-container">
       <!-- Video -->
       <div class="player">
-        <iframe src="https://streambetter.cyou/play/play.php?id=727" frameborder="0" width="640" height="360" allowfullscreen></iframe>
+        <video id="hls-player" controls autoplay></video>
       </div>
       <!-- Chat -->
       <div class="chat">
@@ -111,6 +114,21 @@
         zoneId: 'zitkptgwk8',
     });
   </script>
+
+  <!-- HLS inicializace -->
+  <script>
+    const video = document.getElementById('hls-player');
+    const videoSrc = "https://n7.tmo.livebox.cz/hl-live/01817348208ad77548dc76a58d225abd/ltm.smil/chunklist_b6275072.m3u8";
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+    }
+  </script>
 </body>
 </html>
+
 
