@@ -9,13 +9,15 @@
   <!-- Reklamní skript (hlavička) -->
   <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
 
+  <!-- HLS.js -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
   <style>
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
       background: #0d0d0d;
       color: #f5f5f5;
-      overflow-x: hidden;
     }
     header {
       background: #111;
@@ -33,13 +35,8 @@
     nav a:hover { color: #ff4747; }
 
     main { padding: 30px; }
-    h1 {
-      color: #ff4747;
-      margin-bottom: 25px;
-      text-align: center;
-    }
+    h1 { color: #ff4747; text-align: center; margin-bottom: 25px; }
 
-    /* Layout video + chat */
     .stream-container {
       display: flex;
       justify-content: center;
@@ -48,21 +45,64 @@
       max-width: 1400px;
       margin: 0 auto;
     }
+
     .player, .chat {
       background: #1a1a1a;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
       overflow: hidden;
     }
-    .player iframe {
+
+    /* Video */
+    .video-wrapper {
+      position: relative;
       width: 900px;
-      height: 600px;
-      border: none;
-      display: block;
+      max-width: 100%;
+      background: black;
     }
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: black;
+    }
+
+    /* Ovládací panel */
+    .controls {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+    }
+    .controls button, .controls input {
+      background: none;
+      border: none;
+      color: #fff;
+      cursor: pointer;
+    }
+    .controls button:hover { color: #ff4747; }
+    .progress {
+      flex-grow: 1;
+      height: 6px;
+      background: #333;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .progress-filled {
+      height: 100%;
+      background: #ff4747;
+      width: 0%;
+    }
+
     .chat iframe {
-      width: 350px;   /* pevná šířka, žádný posuvník */
-      height: 600px;  /* pevná výška, žádný posuvník */
+      width: 350px;
+      height: 600px;
       border: none;
       display: block;
     }
@@ -70,6 +110,10 @@
     footer {
       background: #111; color: #aaa; text-align: center;
       padding: 15px; border-top: 2px solid #ff4747; margin-top: 40px;
+    }
+
+    @media (max-width: 1100px) {
+      .chat iframe { width: 100%; height: 400px; }
     }
   </style>
 </head>
@@ -91,7 +135,15 @@
     <div class="stream-container">
       <!-- Video -->
       <div class="player">
-        <iframe src="https://streambetter.cyou/play/play.php?id=728" frameborder="0" width="640" height="360" allowfullscreen></iframe>
+        <div class="video-wrapper">
+          <video id="hls-player"></video>
+          <div class="controls">
+            <button id="play-pause">⏯️</button>
+            <div class="progress"><div class="progress-filled"></div></div>
+            <input type="range" id="volume" min="0" max="1" step="0.05" value="1">
+            <button id="fullscreen">⛶</button>
+          </div>
+        </div>
       </div>
       <!-- Chat -->
       <div class="chat">
@@ -107,8 +159,44 @@
 
   <!-- Reklamní skript (patička) -->
   <script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'zitkptgwk8',
+    aclib.runAutoTag({ zoneId: 'zitkptgwk8' });
+  </script>
+
+  <!-- HLS + Ovládání -->
+  <script>
+    const video = document.getElementById('hls-player');
+    const videoSrc = "https://lasvideoblobs0prod-standard.b-cdn.net/vods/blobs0/68b98074c238c71a081b6dd2/index.m3u8";
+
+    if (Hls.isSupported()) {
+      const hls = new Hls();
+      hls.loadSource(videoSrc);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = videoSrc;
+    }
+
+    const playPauseBtn = document.getElementById('play-pause');
+    const volumeSlider = document.getElementById('volume');
+    const fullscreenBtn = document.getElementById('fullscreen');
+    const progress = document.querySelector('.progress');
+    const progressFilled = document.querySelector('.progress-filled');
+
+    playPauseBtn.addEventListener('click', () => {
+      if (video.paused) { video.play(); } else { video.pause(); }
+    });
+    volumeSlider.addEventListener('input', () => {
+      video.volume = volumeSlider.value;
+    });
+    fullscreenBtn.addEventListener('click', () => {
+      if (video.requestFullscreen) video.requestFullscreen();
+    });
+    video.addEventListener('timeupdate', () => {
+      const percent = (video.currentTime / video.duration) * 100;
+      progressFilled.style.width = percent + '%';
+    });
+    progress.addEventListener('click', (e) => {
+      const newTime = e.offsetX / progress.offsetWidth * video.duration;
+      video.currentTime = newTime;
     });
   </script>
 </body>
