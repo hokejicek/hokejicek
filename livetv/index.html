@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live TV | Hokejíček</title>
+  <title>Hokejíček – Live TV</title>
   <link rel="icon" type="image/png" href="/favicon.png">
 
   <!-- Reklamní skript (hlavička) -->
@@ -16,7 +16,6 @@
       background: #0d0d0d;
       color: #f5f5f5;
     }
-
     header {
       background: #111;
       border-bottom: 2px solid #ff4747;
@@ -25,61 +24,89 @@
       justify-content: space-between;
       align-items: center;
     }
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #ff4747;
-    }
+    .logo { font-size: 26px; font-weight: bold; color: #ff4747; }
     nav a {
-      margin-left: 25px;
-      color: #eee;
-      font-weight: bold;
-      text-decoration: none;
+      margin-left: 25px; color: #eee; font-weight: bold; text-decoration: none;
       transition: color 0.3s;
     }
     nav a:hover { color: #ff4747; }
 
-    main {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 20px;
-    }
     h1 {
-      color: #ff4747;
       text-align: center;
-      margin-bottom: 30px;
+      margin: 35px 0 10px;
+      color: #ff4747;
+      font-size: 2em;
     }
 
-    .grid {
+    /* Kategorie */
+    .categories {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    .categories button {
+      background: #1a1a1a;
+      color: #f5f5f5;
+      border: 2px solid #ff4747;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .categories button:hover {
+      background: #ff4747;
+    }
+
+    /* Grid kanálů */
+    .channels {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 0 auto 50px;
+      padding: 0 20px;
     }
     .channel {
       background: #1a1a1a;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-      padding: 25px;
+      padding: 20px;
       text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      transition: transform 0.2s;
     }
+    .channel:hover { transform: translateY(-4px); }
     .channel h2 {
+      margin: 10px 0 15px;
       font-size: 18px;
-      color: #ff4747;
-      margin-bottom: 15px;
+      color: #fff;
     }
     .btn {
-      display: inline-block;
-      padding: 10px 20px;
       background: #ff4747;
       color: #fff;
-      font-weight: bold;
-      border-radius: 12px;
+      padding: 10px 18px;
+      border-radius: 8px;
       text-decoration: none;
-      transition: background 0.3s, transform 0.2s;
+      display: inline-block;
+      font-weight: bold;
+      transition: background 0.3s;
+      position: relative;
     }
-    .btn:hover {
-      background: #d93b3b;
-      transform: scale(1.05);
+    .btn:hover { background: #e63b3b; }
+    .btn::before {
+      content: "●";
+      color: #ff0000;
+      font-size: 14px;
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.3; }
+      100% { opacity: 1; }
     }
 
     footer {
@@ -89,7 +116,6 @@
       padding: 15px;
       border-top: 2px solid #ff4747;
       font-size: 14px;
-      margin-top: 40px;
     }
   </style>
 </head>
@@ -105,38 +131,100 @@
     </nav>
   </header>
 
-  <main>
-    <h1>📺 Live TV – Sportovní kanály</h1>
+  <!-- Titulek -->
+  <h1>📺 Live TV – Sportovní kanály</h1>
 
-    <div class="grid">
-      <div class="channel"><h2>Nova Sport 1</h2><a class="btn" href="/livetv/nova1/">▶ Spustit přehrávač</a></div>
-      <div class="channel"><h2>Nova Sport 2</h2><a class="btn" href="/livetv/nova2/">▶ Spustit přehrávač</a></div>
-      <div class="channel"><h2>Nova Sport 3</h2><a class="btn" href="/livetv/nova3/">▶ Spustit přehrávač</a></div>
-      <div class="channel"><h2>Nova Sport 4</h2><a class="btn" href="/livetv/nova4/">▶ Spustit přehrávač</a></div>
-      <div class="channel"><h2>Nova Sport 5</h2><a class="btn" href="/livetv/nova5/">▶ Spustit přehrávač</a></div>
-      <div class="channel"><h2>Nova Sport 6</h2><a class="btn" href="/livetv/nova6/">▶ Spustit přehrávač</a></div>
+  <!-- Kategorie -->
+  <div class="categories">
+    <button onclick="filterChannels('nova')">Nova Sport</button>
+    <button onclick="filterChannels('oneplay')">OnePlay</button>
+    <button onclick="filterChannels('ct')">ČT</button>
+    <button onclick="filterChannels('ostatni')">Ostatní</button>
+    <button onclick="filterChannels('all')">Všechny</button>
+  </div>
 
-      <div class="channel"><h2>OnePlay Sport 1</h2><a class="btn" href="/livetv/one1/">▶ Spustit přehrávač</a></div>
-      <div class="channel"><h2>OnePlay Sport 2</h2><a class="btn" href="/livetv/one2/">▶ Spustit přehrávač</a></div>
-      <div class="channel"><h2>OnePlay Sport 3</h2><a class="btn" href="/livetv/one3/">▶ Spustit přehrávač</a></div>
-      <div class="channel"><h2>OnePlay Sport 4</h2><a class="btn" href="/livetv/one4/">▶ Spustit přehrávač</a></div>
-
-      <div class="channel"><h2>ČT Sport</h2><a class="btn" href="/livetv/ctsport/">▶ Spustit přehrávač</a></div>
-      <div class="channel"><h2>Sport 1</h2><a class="btn" href="/livetv/sport1/">▶ Spustit přehrávač</a></div>
+  <!-- Grid kanálů -->
+  <div class="channels">
+    <div class="channel nova">
+      <h2>Nova Sport 1</h2>
+      <a href="/livetv/nova1" class="btn">Spustit přehrávač</a>
     </div>
-  </main>
+    <div class="channel nova">
+      <h2>Nova Sport 2</h2>
+      <a href="/livetv/nova2" class="btn">Spustit přehrávač</a>
+    </div>
+    <div class="channel nova">
+      <h2>Nova Sport 3</h2>
+      <a href="/livetv/nova3" class="btn">Spustit přehrávač</a>
+    </div>
+    <div class="channel nova">
+      <h2>Nova Sport 4</h2>
+      <a href="/livetv/nova4" class="btn">Spustit přehrávač</a>
+    </div>
+    <div class="channel nova">
+      <h2>Nova Sport 5</h2>
+      <a href="/livetv/nova5" class="btn">Spustit přehrávač</a>
+    </div>
+    <div class="channel nova">
+      <h2>Nova Sport 6</h2>
+      <a href="/livetv/nova6" class="btn">Spustit přehrávač</a>
+    </div>
 
+    <div class="channel oneplay">
+      <h2>OnePlay Sport 1</h2>
+      <a href="/livetv/one1" class="btn">Spustit přehrávač</a>
+    </div>
+    <div class="channel oneplay">
+      <h2>OnePlay Sport 2</h2>
+      <a href="/livetv/one2" class="btn">Spustit přehrávač</a>
+    </div>
+    <div class="channel oneplay">
+      <h2>OnePlay Sport 3</h2>
+      <a href="/livetv/one3" class="btn">Spustit přehrávač</a>
+    </div>
+    <div class="channel oneplay">
+      <h2>OnePlay Sport 4</h2>
+      <a href="/livetv/one4" class="btn">Spustit přehrávač</a>
+    </div>
+
+    <div class="channel ct">
+      <h2>ČT Sport</h2>
+      <a href="/livetv/ctsport" class="btn">Spustit přehrávač</a>
+    </div>
+
+    <div class="channel ostatni">
+      <h2>Sport 1</h2>
+      <a href="/livetv/sport1" class="btn">Spustit přehrávač</a>
+    </div>
+  </div>
+
+  <!-- Patička -->
   <footer>
     © 2025 Hokejíček | info@hokejicek.site
   </footer>
 
+  <!-- Filtr kanálů -->
+  <script>
+    function filterChannels(category) {
+      let channels = document.querySelectorAll(".channel");
+      channels.forEach(ch => {
+        if (category === "all") {
+          ch.style.display = "block";
+        } else if (ch.classList.contains(category)) {
+          ch.style.display = "block";
+        } else {
+          ch.style.display = "none";
+        }
+      });
+    }
+  </script>
+
   <!-- Reklamní skript (patička) -->
   <script type="text/javascript">
     aclib.runAutoTag({
-        zoneId: 'zitkptgwk8',
+      zoneId: 'zitkptgwk8',
     });
   </script>
+
 </body>
 </html>
-
-
