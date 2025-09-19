@@ -25,18 +25,8 @@
       justify-content: space-between;
       align-items: center;
     }
-    .logo {
-      font-size: 26px;
-      font-weight: bold;
-      color: #ff4747;
-    }
-    nav a {
-      margin-left: 25px;
-      color: #eee;
-      font-weight: bold;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+    .logo { font-size: 26px; font-weight: bold; color: #ff4747; }
+    nav a { margin-left: 25px; color: #eee; font-weight: bold; text-decoration: none; }
     nav a:hover { color: #ff4747; }
 
     h1 {
@@ -47,13 +37,14 @@
     }
 
     .matches {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto 50px;
+      padding: 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 20px;
-      padding: 0 20px;
     }
+
     .match {
       background: #1a1a1a;
       border-radius: 12px;
@@ -61,19 +52,33 @@
       text-align: center;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
-    .match h2 { font-size: 18px; margin: 10px 0; }
-    .info { font-size: 14px; margin: 5px 0; color: #ccc; }
-    .btn {
+    .match h2 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #fff;
+    }
+    .match p {
+      margin: 6px 0;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .countdown {
+      margin: 10px 0;
+      font-weight: bold;
+      color: #ff4747;
+    }
+    .watch-btn {
+      display: inline-block;
+      margin-top: 10px;
       background: #ff4747;
       color: #fff;
       padding: 10px 20px;
       border-radius: 8px;
       text-decoration: none;
-      display: inline-block;
-      margin-top: 8px;
+      font-weight: bold;
       transition: background 0.3s;
     }
-    .btn:hover { background: #e63b3b; }
+    .watch-btn:hover { background: #e63b3b; }
 
     footer {
       background: #111;
@@ -102,21 +107,24 @@
   <div class="matches">
     <div class="match">
       <h2>HC Oceláři Třinec vs HC Škoda Plzeň</h2>
-      <div class="info">📅 19. 9. 2025 – 17:00</div>
-      <div class="info">📍 Werk Aréna</div>
-      <a href="/stream1" class="btn">▶️ Sleduj přenos</a>
+      <p>📅 19. 9. 2025 – 17:00</p>
+      <p>📍 Werk Aréna</p>
+      <div class="countdown" data-time="2025-09-19T17:00:00"></div>
+      <a href="/stream1" class="watch-btn">▶️ Sleduj přenos</a>
     </div>
     <div class="match">
       <h2>HC Kometa Brno vs Bílí Tygři Liberec</h2>
-      <div class="info">📅 19. 9. 2025 – 18:00</div>
-      <div class="info">📍 Winning Group Aréna</div>
-      <a href="/stream6" class="btn">▶️ Sleduj přenos</a>
+      <p>📅 19. 9. 2025 – 18:00</p>
+      <p>📍 Winning Group Aréna</p>
+      <div class="countdown" data-time="2025-09-19T18:00:00"></div>
+      <a href="/stream6" class="watch-btn">▶️ Sleduj přenos</a>
     </div>
     <div class="match">
       <h2>Real Betis vs Real Sociedad ⚽</h2>
-      <div class="info">📅 19. 9. 2025 – 21:00</div>
-      <div class="info">📍 Estadio de La Cartuja</div>
-      <a href="/stream16" class="btn">▶️ Sleduj přenos</a>
+      <p>📅 19. 9. 2025 – 21:00</p>
+      <p>📍 Estadio de La Cartuja</p>
+      <div class="countdown" data-time="2025-09-19T21:00:00"></div>
+      <a href="/stream16" class="watch-btn">▶️ Sleduj přenos</a>
     </div>
   </div>
 
@@ -124,26 +132,26 @@
   <h1>📺 Všechny přenosy</h1>
   <div class="matches">
     <!-- TELH -->
-    <div class="match"><h2>Třinec vs Plzeň</h2><div class="info">17:00 – Třinec</div><a href="/stream1" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Litvínov vs Sparta</h2><div class="info">17:30 – Litvínov</div><a href="/stream2" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Vítkovice vs Boleslav</h2><div class="info">17:30 – Ostrava</div><a href="/stream3" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>K. Vary vs Mountfield</h2><div class="info">18:00 – KV</div><a href="/stream4" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Kladno vs Č. Budějovice</h2><div class="info">18:00 – Kladno</div><a href="/stream5" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Kometa vs Liberec</h2><div class="info">18:00 – Brno</div><a href="/stream6" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Pardubice vs Olomouc</h2><div class="info">18:00 – Pardubice</div><a href="/stream7" class="btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Třinec vs Plzeň</h2><p>📅 19. 9. 2025 – 17:00</p><p>📍 Werk Aréna</p><div class="countdown" data-time="2025-09-19T17:00:00"></div><a href="/stream1" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Litvínov vs Sparta</h2><p>📅 19. 9. 2025 – 17:30</p><p>📍 Zimní stadion Ivana Hlinky</p><div class="countdown" data-time="2025-09-19T17:30:00"></div><a href="/stream2" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Vítkovice vs Mladá Boleslav</h2><p>📅 19. 9. 2025 – 17:30</p><p>📍 Ostravar Aréna</p><div class="countdown" data-time="2025-09-19T17:30:00"></div><a href="/stream3" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Karlovy Vary vs Mountfield HK</h2><p>📅 19. 9. 2025 – 18:00</p><p>📍 Mattoni Aréna</p><div class="countdown" data-time="2025-09-19T18:00:00"></div><a href="/stream4" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Kladno vs České Budějovice</h2><p>📅 19. 9. 2025 – 18:00</p><p>📍 ČEZ Stadion</p><div class="countdown" data-time="2025-09-19T18:00:00"></div><a href="/stream5" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Kometa Brno vs Liberec</h2><p>📅 19. 9. 2025 – 18:00</p><p>📍 Winning Group Aréna</p><div class="countdown" data-time="2025-09-19T18:00:00"></div><a href="/stream6" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Pardubice vs Olomouc</h2><p>📅 19. 9. 2025 – 18:00</p><p>📍 Enteria Aréna</p><div class="countdown" data-time="2025-09-19T18:00:00"></div><a href="/stream7" class="watch-btn">▶️ Sleduj</a></div>
 
-    <!-- ELJ -->
-    <div class="match"><h2>Kometa U20 vs Poruba U20</h2><div class="info">13:00 – Brno</div><a href="/stream8" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Liberec U20 vs Pardubice U20</h2><div class="info">17:00 – Liberec</div><a href="/stream9" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Boleslav U20 vs Mountfield U20</h2><div class="info">17:30 – MB</div><a href="/stream10" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Sparta U20 vs Zlín U20</h2><div class="info">17:30 – Praha</div><a href="/stream11" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Slavia U20 vs Třinec U20</h2><div class="info">18:00 – Eden</div><a href="/stream12" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Jihlava U20 vs Vítkovice U20</h2><div class="info">19:00 – Jihlava</div><a href="/stream13" class="btn">▶️ Sleduj</a></div>
+    <!-- ELJ U20 -->
+    <div class="match"><h2>Kometa Brno U20 vs Poruba U20</h2><p>📅 19. 9. 2025 – 13:00</p><p>📍 Winning Group Aréna</p><div class="countdown" data-time="2025-09-19T13:00:00"></div><a href="/stream8" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Liberec U20 vs Pardubice U20</h2><p>📅 19. 9. 2025 – 17:00</p><p>📍 Home Credit Aréna</p><div class="countdown" data-time="2025-09-19T17:00:00"></div><a href="/stream9" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Mladá Boleslav U20 vs Mountfield HK U20</h2><p>📅 19. 9. 2025 – 17:30</p><p>📍 ŠKO-ENERGO Aréna</p><div class="countdown" data-time="2025-09-19T17:30:00"></div><a href="/stream10" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Sparta Praha U20 vs Zlín U20</h2><p>📅 19. 9. 2025 – 17:30</p><p>📍 Sportovní hala Fortuna</p><div class="countdown" data-time="2025-09-19T17:30:00"></div><a href="/stream11" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Slavia Praha U20 vs Třinec U20</h2><p>📅 19. 9. 2025 – 18:00</p><p>📍 Zimní stadion Eden</p><div class="countdown" data-time="2025-09-19T18:00:00"></div><a href="/stream12" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Jihlava U20 vs Vítkovice U20</h2><p>📅 19. 9. 2025 – 19:00</p><p>📍 Veřejné sportoviště Jihlava</p><div class="countdown" data-time="2025-09-19T19:00:00"></div><a href="/stream13" class="watch-btn">▶️ Sleduj</a></div>
 
     <!-- Fotbal -->
-    <div class="match"><h2>Vlašim vs Chrudim ⚽</h2><div class="info">17:00 – Vlašim</div><a href="/stream14" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Ústí n. L. vs Prostějov ⚽</h2><div class="info">17:30 – Ústí</div><a href="/stream15" class="btn">▶️ Sleduj</a></div>
-    <div class="match"><h2>Betis vs Real Sociedad ⚽</h2><div class="info">21:00 – Sevilla</div><a href="/stream16" class="btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Vlašim vs Chrudim ⚽</h2><p>📅 19. 9. 2025 – 17:00</p><p>📍 Stadion v Kollárově ulici</p><div class="countdown" data-time="2025-09-19T17:00:00"></div><a href="/stream14" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Ústí n. L. vs Prostějov ⚽</h2><p>📅 19. 9. 2025 – 17:30</p><p>📍 Městský stadion Ústí</p><div class="countdown" data-time="2025-09-19T17:30:00"></div><a href="/stream15" class="watch-btn">▶️ Sleduj</a></div>
+    <div class="match"><h2>Real Betis vs Real Sociedad ⚽</h2><p>📅 19. 9. 2025 – 21:00</p><p>📍 Estadio de La Cartuja</p><div class="countdown" data-time="2025-09-19T21:00:00"></div><a href="/stream16" class="watch-btn">▶️ Sleduj</a></div>
   </div>
 
   <!-- Patička -->
@@ -151,10 +159,31 @@
     © 2025 Hokejíček | info@hokejicek.site
   </footer>
 
+  <!-- Countdown script -->
+  <script>
+    function updateCountdown() {
+      const now = new Date().getTime();
+      document.querySelectorAll(".countdown").forEach(el => {
+        const target = new Date(el.dataset.time).getTime();
+        const diff = target - now;
+        if (diff <= 0) {
+          el.innerHTML = "🔴 Právě probíhá";
+        } else {
+          const h = Math.floor(diff / (1000*60*60));
+          const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+          const s = Math.floor((diff % (1000*60)) / 1000);
+          el.innerHTML = `⏳ ${h}h ${m}m ${s}s`;
+        }
+      });
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+
   <!-- Reklamní skript (patička) -->
   <script type="text/javascript">
     aclib.runAutoTag({
-        zoneId: 'zitkptgwk8',
+        zoneId: 'zitkptgwk8'
     });
   </script>
 
