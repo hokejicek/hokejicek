@@ -9,9 +9,6 @@
   <!-- Reklamní skript (hlavička) -->
   <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
 
-  <!-- HLS.js pro M3U8 -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
   <style>
     body {
       margin: 0;
@@ -57,15 +54,15 @@
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
       overflow: hidden;
     }
-    video {
+    .player iframe {
       width: 900px;
       height: 600px;
+      border: none;
       display: block;
-      background: black;
     }
     .chat iframe {
-      width: 350px;
-      height: 600px;
+      width: 350px;   /* pevná šířka, žádný posuvník */
+      height: 600px;  /* pevná výška, žádný posuvník */
       border: none;
       display: block;
     }
@@ -94,7 +91,7 @@
     <div class="stream-container">
       <!-- Video -->
       <div class="player">
-        <video id="hls-player" controls autoplay></video>
+        <iframe src="https://streambetter.cyou/play/play.php?id=729" frameborder="0" width="640" height="360" allowfullscreen></iframe>
       </div>
       <!-- Chat -->
       <div class="chat">
@@ -114,21 +111,6 @@
         zoneId: 'zitkptgwk8',
     });
   </script>
-
-  <!-- HLS inicializace -->
-  <script>
-    const video = document.getElementById('hls-player');
-    const videoSrc = "https://n5.tmo.livebox.cz/hl-live/dfcf85bb66bb15cd69772e8875828b43/zln.smil/chunklist_b6275072.m3u8";
-
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(videoSrc);
-      hls.attachMedia(video);
-    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-      video.src = videoSrc;
-    }
-  </script>
 </body>
 </html>
-
 
