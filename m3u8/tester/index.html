@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Custom Stream Player — HLS / DASH / MP4</title>
+
+<!-- hls.js & dash.js (CDN) -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="https://cdn.dashjs.org/latest/dash.all.min.js"></script>
+
+<style>
+  :root{
+    --bg:#0f1114; --panel:#121416; --accent:#ff4757; --muted:#9aa3ad; --glass: rgba(255,255,255,0.03);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#eef2f3;background:linear-gradient(180deg,#070709 0%, #0f1114 100%)}
+  .wrap{max-width:1200px;margin:28px auto;padding:16px}
+  h1{color:var(--accent);text-align:center;margin:6px 0 18px;font-size:20px}
+  .player-shell{
+    background:var(--panel);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 10px 30px rgba(2,8,23,0.6);
+    display:flex;
+    gap:16px;
+    align-items:stretch;
+    padding:18px;
+    align-items:center;
+  }
+
+  /* video container */
+  .video-wrap{
+    position:relative;
+    flex:1 1 760px;
+    min-height:420px;
+    border-radius:10px;
+    overflow:hidden;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  video{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    background:black;
+    display:block;
+  }
+
+  /* custom overlay big play */
+  .big-play{
+    position:absolute;
+    left:18px; top:18px;
+    background:rgba(0,0,0,0.5);
+    color:#fff;padding:8px 12px;border-radius:10px;font-weight:700;
+    display:flex;gap:8px;align-items:center;z-index:20;
+  }
+  .big-play .dot{width:10px;height:10px;background:var(--accent);border-radius:50%}
+  .live-badge{
+    position:absolute;
+    left:18px; bottom:18px;
+    background: linear-gradient(90deg,var(--accent),#ff7b82);
+    color:white;padding:8px 12px;border-radius:999px;font-weight:700;display:flex;gap:8px;align-items:center;z-index:20;
+    box-shadow:0 6px 18px rgba(255,71,87,0.12);
+    cursor:pointer;
+  }
+
+  /* controls bar */
+  .controls{
+    position:absolute; left:0; right:0; bottom:0; z-index:22;
+    padding:10px 14px;background:linear-gradient(180deg,rgba(0,0,0,0.05),rgba(0,0,0,0.45));
+    display:flex;flex-direction:column;gap:8px;transition:opacity .18s ease,transform .18s ease;
+  }
+  .controls.hidden{opacity:0;transform:translateY(8px);pointer-events:none}
+  .row{display:flex;align-items:center;gap:10px}
+  .btn{
+    background:var(--glass);color:var(--muted);border:0;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:700;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn:hover{color:white}
+  .btn.icon{padding:8px;border-radius:8px}
+  .progress{
+    height:8px;background:rgba(255,255,255,0.06);border-radius:999px;cursor:pointer;flex:1;position:relative;
+    overflow:hidden;
+  }
+  .progress .buffer{position:absolute;left:0;top:0;height:100%;background:rgba(255,255,255,0.08);width:0%}
+  .progress .played{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--accent),#ff7b82);width:0%}
+  .time{color:var(--muted);font-size:13px;min-width:78px;text-align:right}
+
+  /* right column (URL + info) */
+  .side{
+    width:360px;flex:0 0 360px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .box{
+    background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)
+  }
+  label{display:block;color:var(--muted);font-size:13px;margin-bottom:8px}
+  input[type="text"]{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
+  .tabs{display:flex;gap:8px;margin-bottom:8px}
+  .tab{padding:8px 10px;border-radius:8px;background:rgba(0,0,0,0.2);cursor:pointer;color:var(--muted);font-weight:700}
+  .tab.active{background:linear-gradient(90deg,var(--accent),#ff7b82);color:#fff}
+  .play-action{display:flex;gap:10px;margin-top:6px}
+  .note{font-size:13px;color:var(--muted);line-height:1.3}
+
+  /* responsive */
+  @media (max-width:980px){ .player-shell{flex-direction:column} .side{width:100%;flex-basis:auto} .video-wrap{min-height:300px} }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Custom Stream Player — HLS / DASH / MP4</h1>
+
+    <div class="player-shell" role="application" aria-label="Custom stream player">
+      <div class="video-wrap" id="videoWrap">
+        <video id="video" playsinline webkit-playsinline preload="metadata"></video>
+
+        <div class="big-play" id="bigPlay" style="display:none;">
+          <div class="dot"></div><div id="bigPlayText">Paused</div>
+        </div>
+
+        <div class="live-badge" id="liveBadge" title="Klikni pro restart živého streamu" style="display:none;">🔴 LIVE</div>
+
+        <div class="controls" id="controls">
+          <div class="row" style="align-items:center">
+            <button class="btn icon" id="playBtn" title="Play/Pause">▶</button>
+            <div style="display:flex;flex-direction:column;flex:1;gap:6px">
+              <div class="progress" id="progress">
+                <div class="buffer" id="bufferBar"></div>
+                <div class="played" id="playedBar"></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:10px">
+                <div style="display:flex;gap:6px;align-items:center">
+                  <button class="btn icon" id="muteBtn" title="Zvuk">🔊</button>
+                  <input id="vol" type="range" min="0" max="1" step="0.05" value="1" style="width:90px"/>
+                </div>
+                <div style="flex:1"></div>
+                <div class="time" id="timeDisplay">00:00 / 00:00</div>
+                <button class="btn icon" id="fsBtn" title="Fullscreen">⤢</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="side">
+        <div class="box">
+          <div class="tabs" role="tablist">
+            <div class="tab active" data-type="hls">HLS</div>
+            <div class="tab" data-type="dash">DASH</div>
+            <div class="tab" data-type="mp4">MP4</div>
+          </div>
+
+          <label for="url">Vlož URL streamu</label>
+          <input id="url" placeholder="https://example.com/stream/index.m3u8 nebo manifest.mpd nebo video.mp4" />
+
+          <div class="play-action">
+            <button class="btn" id="startBtn">▶️ Spustit</button>
+            <button class="btn" id="stopBtn">■ Zastavit</button>
+          </div>
+
+          <div style="height:10px"></div>
+          <div class="note">
+            Poznámka: pokud stream používá DRM (Widevine/PlayReady) nebo má omezené CORS/prístupové tokeny, přehrání se nemusí povést v prohlížeči.
+          </div>
+        </div>
+
+        <div class="box">
+          <div style="font-weight:800;margin-bottom:8px">Aktuální stream</div>
+          <div id="currentInfo" style="color:var(--muted)">Žádný stream</div>
+        </div>
+
+        <div class="box">
+          <div style="font-weight:800;margin-bottom:8px">Rychlé testy</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn" data-test="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8">HLS test</button>
+            <button class="btn" data-test="https://dash.akamaized.net/akamai/bbb_30fps/bbb_30fps.mpd">DASH test</button>
+            <button class="btn" data-test="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4">MP4 test</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* --------- helpers & state --------- */
+const video = document.getElementById('video');
+const urlInput = document.getElementById('url');
+const startBtn = document.getElementById('startBtn');
+const stopBtn = document.getElementById('stopBtn');
+const playBtn = document.getElementById('playBtn');
+const muteBtn = document.getElementById('muteBtn');
+const vol = document.getElementById('vol');
+const fsBtn = document.getElementById('fsBtn');
+const progress = document.getElementById('progress');
+const playedBar = document.getElementById('playedBar');
+const bufferBar = document.getElementById('bufferBar');
+const timeDisplay = document.getElementById('timeDisplay');
+const controls = document.getElementById('controls');
+const bigPlay = document.getElementById('bigPlay');
+const bigPlayText = document.getElementById('bigPlayText');
+const liveBadge = document.getElementById('liveBadge');
+const currentInfo = document.getElementById('currentInfo');
+
+let hls = null;
+let dashPlayer = null;
+let hideTimeout = null;
+let currentType = 'hls'; // default
+let isLiveStream = false;
+
+/* Tabs */
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    currentType = t.dataset.type;
+  });
+});
+
+/* Quick test buttons */
+document.querySelectorAll('[data-test]').forEach(btn=>{
+  btn.addEventListener('click', ()=> {
+    urlInput.value = btn.dataset.test;
+  });
+});
+
+/* Play / Pause */
+playBtn.addEventListener('click', ()=> togglePlay());
+video.addEventListener('click', ()=> togglePlay());
+
+function togglePlay(){
+  if(video.paused) video.play().catch(()=>{});
+  else video.pause();
+}
+
+/* Volume & mute */
+vol.addEventListener('input', ()=> {
+  video.volume = vol.value;
+});
+muteBtn.addEventListener('click', ()=> {
+  video.muted = !video.muted;
+  muteBtn.textContent = video.muted ? '🔈' : '🔊';
+});
+video.volume = vol.value;
+
+/* Fullscreen */
+fsBtn.addEventListener('click', ()=> {
+  if(!document.fullscreenElement) document.querySelector('.video-wrap').requestFullscreen().catch(()=>{});
+  else document.exitFullscreen();
+});
+
+/* Update UI on play/pause/timeupdate */
+video.addEventListener('play', ()=> {
+  playBtn.textContent = '⏸';
+  bigPlay.style.display = 'none';
+});
+video.addEventListener('pause', ()=> {
+  playBtn.textContent = '▶';
+  bigPlay.style.display = 'flex';
+  bigPlayText.textContent = 'Paused';
+});
+video.addEventListener('timeupdate', updateProgress);
+video.addEventListener('durationchange', updateProgress);
+video.addEventListener('progress', updateBuffer);
+
+/* progress click seeking */
+progress.addEventListener('click', (e)=>{
+  const rect = progress.getBoundingClientRect();
+  const pct = Math.max(0, Math.min(1, (e.clientX - rect.left)/rect.width));
+  if(!isLiveStream && video.duration && isFinite(video.duration)){
+    video.currentTime = pct * video.duration;
+  } else {
+    // if live, try to seek live (most streams auto)
+    // do nothing for live
+  }
+});
+
+/* update time & bars */
+function formatTime(s){
+  if(!isFinite(s)) return '00:00';
+  s = Math.floor(s);
+  const h = Math.floor(s/3600), m = Math.floor((s%3600)/60), sec = s%60;
+  if(h>0) return `${h}:${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+  return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`;
+}
+function updateProgress(){
+  if(isLiveStream){
+    playedBar.style.width = '100%';
+    timeDisplay.textContent = 'LIVE';
+    return;
+  }
+  const d = video.duration || 0;
+  const c = video.currentTime || 0;
+  const pct = d ? (c/d)*100 : 0;
+  playedBar.style.width = pct + '%';
+  timeDisplay.textContent = `${formatTime(c)} / ${formatTime(d)}`;
+}
+function updateBuffer(){
+  try{
+    const buffered = video.buffered;
+    if(buffered.length){
+      const end = buffered.end(buffered.length-1);
+      const d = video.duration || 1;
+      const pct = d ? (end/d)*100 : 0;
+      bufferBar.style.width = Math.min(100,pct) + '%';
+    }
+  }catch(e){}
+}
+
+/* Controls hide on inactivity */
+function showControls(){ controls.classList.remove('hidden'); resetHide(); }
+function hideControls(){ if(!video.paused) controls.classList.add('hidden'); }
+function resetHide(){
+  clearTimeout(hideTimeout);
+  hideTimeout = setTimeout(()=>{ hideControls(); }, 4000);
+}
+document.querySelector('.video-wrap').addEventListener('mousemove', showControls);
+document.querySelector('.video-wrap').addEventListener('mouseleave', ()=>{ if(!video.paused) hideControls(); });
+
+/* Live badge behavior: click to reload stream */
+liveBadge.addEventListener('click', ()=>{
+  if(currentSrc) loadSrc(currentSrc, currentType, true);
+});
+
+/* --------- load logic for HLS/DASH/MP4 --------- */
+let currentSrc = '';
+
+async function loadSrc(src, type, restart=false){
+  // stop any existing players
+  stopPlayers();
+
+  currentSrc = src;
+  currentType = type || detectTypeFromUrl(src);
+
+  // set info
+  currentInfo.textContent = `${currentType.toUpperCase()} — ${src}`;
+
+  // determine live heuristic
+  isLiveStream = /m3u8|playlist|live/i.test(src) || /dash/i.test(src) && /live/i.test(src);
+  liveBadge.style.display = isLiveStream ? 'flex' : 'none';
+
+  // attach source
+  if(currentType === 'hls'){
+    if(Hls.isSupported()){
+      hls = new Hls({enableWorker:true,lowLatencyMode:true});
+      hls.loadSource(src);
+      hls.attachMedia(video);
+      hls.on(Hls.Events.ERROR, (ev, data) => {
+        console.warn('Hls error', data);
+      });
+      hls.on(Hls.Events.MANIFEST_PARSED, ()=> {
+        if(!restart) try{ video.play(); }catch(e){}
+      });
+    } else if(video.canPlayType('application/vnd.apple.mpegurl')){
+      video.src = src;
+      if(!restart) try{ video.play(); }catch(e){}
+    } else {
+      alert('HLS not supported in this browser.');
+    }
+  } else if(currentType === 'dash'){
+    try{
+      dashPlayer = dashjs.MediaPlayer().create();
+      dashPlayer.initialize(video, src, !restart);
+      dashPlayer.on('error', (e)=> console.warn('dashjs err', e));
+    }catch(e){
+      console.warn('dash init failed', e);
+      alert('DASH přehrávač selhal (možné DRM / CORS omezení).');
+    }
+  } else { // mp4
+    video.src = src;
+    if(!restart) try{ await video.play(); }catch(e){ /* play blocked */ }
+  }
+
+  // reset UI
+  bigPlay.style.display = 'flex';
+  bigPlayText.textContent = 'Loading…';
+  setTimeout(()=>{ bigPlayText.textContent = video.paused ? 'Paused' : 'Playing'; }, 800);
+}
+
+/* stop & cleanup */
+function stopPlayers(){
+  // dash
+  try{ if(dashPlayer){ dashPlayer.reset(); dashPlayer = null; } }catch(e){}
+  // hls
+  try{ if(hls){ hls.destroy(); hls = null; } }catch(e){}
+  // video src
+  try{ video.pause(); video.removeAttribute('src'); video.load(); }catch(e){}
+  currentInfo.textContent = 'Žádný stream';
+  liveBadge.style.display = 'none';
+  currentSrc = '';
+}
+
+/* detect type from url heuristics */
+function detectTypeFromUrl(u){
+  if(!u) return 'mp4';
+  u = u.split('?')[0].toLowerCase();
+  if(u.endsWith('.m3u8')) return 'hls';
+  if(u.endsWith('.mpd')) return 'dash';
+  if(u.endsWith('.mp4') || u.endsWith('.webm') || u.endsWith('.ogg')) return 'mp4';
+  // fallback: if tab selected use tab
+  const active = document.querySelector('.tab.active');
+  return active?.dataset.type || 'hls';
+}
+
+/* start / stop button handlers */
+startBtn.addEventListener('click', ()=> {
+  const u = urlInput.value.trim();
+  if(!u){ alert('Vlož URL streamu.'); return; }
+  const t = currentType || detectTypeFromUrl(u);
+  loadSrc(u, t);
+});
+stopBtn.addEventListener('click', ()=> stopPlayers());
+
+/* small UX: click big overlay to play/pause */
+bigPlay.addEventListener('click', ()=> togglePlay());
+
+/* keyboard: space toggles play/pause */
+document.addEventListener('keydown',(e)=> {
+  if(e.code === 'Space'){ e.preventDefault(); togglePlay(); }
+});
+
+/* handle video events to update UI */
+video.addEventListener('canplay', ()=> {
+  bigPlay.style.display = 'none';
+});
+video.addEventListener('waiting', ()=> { bigPlay.style.display = 'flex'; bigPlayText.textContent = 'Buffering…'; });
+video.addEventListener('playing', ()=> { bigPlay.style.display = 'none'; bigPlayText.textContent = 'Playing'; });
+video.addEventListener('ended', ()=> { bigPlay.style.display = 'flex'; bigPlayText.textContent = 'Ended'; });
+
+/* Initialize example: leave blank by default */
+/* Optionally prefill example URL:
+urlInput.value = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
+loadSrc(urlInput.value, 'hls'); */
+</script>
+</body>
+</html>
